@@ -1,11 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Navigation from "./Navigation";
 import Footer from "./Footer";
 
-export default function Incident(){
+export default function Incident(props){
+
+    useEffect(() => {
+        // Update the document title using the browser API
+        document.title = props.title;
+    });
+
         return (
             <React.Fragment>
                 <CssBaseline/>

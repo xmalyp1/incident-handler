@@ -15,4 +15,3 @@ use Illuminate\Support\Facades\Route;
 
 //Any path will be routed to template since SPA is build in react
 Route::view('/{path?}', 'template');
-

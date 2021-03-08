@@ -12,7 +12,8 @@ import ReactDOM from 'react-dom';
 import {
     BrowserRouter as Router,
     Switch,
-    Route
+    Route,
+    useLocation
 } from "react-router-dom";
 import Footer from "./components/Footer";
 import Incident from "./components/Incident";
@@ -21,8 +22,8 @@ import Home from "./components/Home";
 
 class App extends React.Component{
 
-    componentDidMount() {
-        document.title = 'TEXT';
+    componentDidMount(){
+//        document.title ;
     }
 
     render() {
@@ -31,13 +32,13 @@ class App extends React.Component{
                 <Navigation/>
                 <Switch>
                     <Route exact path="/">
-                        <Home></Home>
+                        <Home title="Domov"></Home>
                     </Route>
                     <Route path="/help">
-                        <Help></Help>
+                        <Help title="Pomoc"></Help>
                     </Route>
                     <Route path="/Incident">
-                        <Incident></Incident>
+                        <Incident title="Úraz"></Incident>
                     </Route>
                 </Switch>
                 <Footer/>

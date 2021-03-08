@@ -1,4 +1,5 @@
 import React from 'react';
+import {useEffect} from "react";
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -100,8 +101,13 @@ const tiers = [
     },
 ];
 
-export default function Home() {
+export default function Home(props) {
     const classes = useStyles();
+
+    useEffect(() => {
+        // Update the document title using the browser API
+        document.title = props.title;
+    });
 
     return (
         <React.Fragment>
