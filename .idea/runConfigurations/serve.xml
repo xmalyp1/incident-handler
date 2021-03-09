@@ -1,16 +1,5 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="serve" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/artisan" scriptParameters="serve">
-    <method v="2">
-      <option name="NpmBeforeRunTask" enabled="true">
-        <package-json value="$PROJECT_DIR$/package.json" />
-        <command value="run" />
-        <scripts>
-          <script value="dev" />
-        </scripts>
-        <node-interpreter value="project" />
-        <envs />
-      </option>
-      <option name="LaunchBrowser.Before.Run" />
-    </method>
+    <method v="2" />
   </configuration>
 </component>
