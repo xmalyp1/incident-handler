@@ -11376,13 +11376,13 @@ function Home(props) {
         align: "center",
         color: "#fff",
         gutterBottom: true,
-        children: "TEXT369"
+        children: "Zaregistruj pracovn\xFD \xFAraz online"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__.default, {
         variant: "h5",
         align: "center",
         color: "#fff",
         component: "p",
-        children: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et placerat augue. Quisque ut est magna. Vivamus nec gravida velit. Aliquam fringilla est lacus, id hendrerit sapien dapibus tempor."
+        children: "Zamestn\xE1vate\u013E je povinn\xFD registrova\u0165 pracovn\xFD \xFAraz, ktor\xFDm bola sp\xF4soben\xE1 pracovn\xE1 neschopnos\u0165 zamestnanca trvaj\xFAca viac ako tri dni, ku ktorej do\u0161lo n\xE1sledkom pracovn\xE9ho \xFArazu."
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_core_Container__WEBPACK_IMPORTED_MODULE_6__.default, {
       maxWidth: "md",
@@ -11500,7 +11500,7 @@ function Incident(props) {
         align: "center",
         color: "#fff",
         component: "p",
-        children: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et placerat augue. Quisque ut est magna. Vivamus nec gravida velit. Aliquam fringilla est lacus, id hendrerit sapien dapibus tempor."
+        children: "HEJLorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et placerat augue. Quisque ut est magna. Vivamus nec gravida velit. Aliquam fringilla est lacus, id hendrerit sapien dapibus tempor."
       })]
     })]
   });

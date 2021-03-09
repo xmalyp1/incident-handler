@@ -115,10 +115,10 @@ export default function Home(props) {
             {/* Hero unit */}
             <Box component="main" className={classes.heroContent}>
                 <Typography component="h1" variant="h2" align="center" color="#fff" gutterBottom>
-                    TEXT369
+                    Zaregistruj pracovný úraz online
                 </Typography>
                 <Typography variant="h5" align="center" color="#fff" component="p">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc et placerat augue. Quisque ut est magna. Vivamus nec gravida velit. Aliquam fringilla est lacus, id hendrerit sapien dapibus tempor.
+                    Zamestnávateľ je povinný registrovať pracovný úraz, ktorým bola spôsobená pracovná neschopnosť zamestnanca trvajúca viac ako tri dni, ku ktorej došlo následkom pracovného úrazu.
                 </Typography>
             </Box>
             {/* End hero unit */}
