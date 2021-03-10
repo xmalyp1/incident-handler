@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WebPageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Any path will be routed to template since SPA is build in react
-Route::view('/{path?}', 'template');
+Route::get('/', [WebPageController::class,'home']);
+Route::get('/help',[WebPageController::class,'help']);
+Route::get('/incident', [WebPageController::class,'incident']);

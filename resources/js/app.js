@@ -16,9 +16,10 @@ import {
     useLocation
 } from "react-router-dom";
 import Footer from "./components/Footer";
-import Incident from "./components/Incident";
-import Help from "./components/Help";
-import Home from "./components/Home";
+import Incident from "./pages/Incident";
+import Help from "./pages/Help";
+import Home from "./pages/Home";
+import CookieMessage from "./components/CookieMessage";
 
 class App extends React.Component{
 
@@ -35,13 +36,14 @@ class App extends React.Component{
                         <Home title="Domov"></Home>
                     </Route>
                     <Route path="/help">
-                        <Help title="Pomoc"></Help>
+                        <Help title="Podpora"></Help>
                     </Route>
                     <Route path="/Incident">
                         <Incident title="Úraz"></Incident>
                     </Route>
                 </Switch>
                 <Footer/>
+                <CookieMessage/>
             </Router>
         );
     }

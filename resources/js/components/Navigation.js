@@ -35,7 +35,7 @@ import HomeIcon from '@material-ui/icons/Home';
         },
     }));
 
-    export default function Navigation(){
+export default function Navigation(){
         const classes = useStyles();
         return (
             <React.Fragment>
