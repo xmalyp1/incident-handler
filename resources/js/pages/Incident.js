@@ -4,13 +4,10 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
+import ReactDOM from "react-dom";
+import Home from "./Home";
 
-export default function Incident(props){
-
-    useEffect(() => {
-        // Update the document title using the browser API
-        document.title = props.title;
-    });
+export default function Incident(){
 
         return (
             <React.Fragment>
@@ -26,3 +23,8 @@ export default function Incident(props){
             </React.Fragment>
         )
     }
+
+
+if (document.getElementById('incident')) {
+    ReactDOM.render(<Incident />, document.getElementById('incident'));
+}

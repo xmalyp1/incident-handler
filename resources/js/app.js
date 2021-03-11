@@ -4,48 +4,16 @@
  * building robust, powerful web applications using React + Laravel.
  */
 
-import Navigation from "./components/Navigation";
-
 require('./bootstrap');
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    useLocation
-} from "react-router-dom";
-import Footer from "./components/Footer";
-import Incident from "./pages/Incident";
-import Help from "./pages/Help";
-import Home from "./pages/Home";
-import CookieMessage from "./components/CookieMessage";
 
-class App extends React.Component{
+/**
+ * Next, we will create a fresh React component instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
 
-    componentDidMount(){
-//        document.title ;
-    }
-
-    render() {
-        return (
-            <Router>
-                <Navigation/>
-                <Switch>
-                    <Route exact path="/">
-                        <Home title="Domov"></Home>
-                    </Route>
-                    <Route path="/help">
-                        <Help title="Podpora"></Help>
-                    </Route>
-                    <Route path="/Incident">
-                        <Incident title="Úraz"></Incident>
-                    </Route>
-                </Switch>
-                <Footer/>
-                <CookieMessage/>
-            </Router>
-        );
-    }
-}
-ReactDOM.render(<App />, document.querySelector('#app'));
+require('./components/Example');
+require('./components/CookieMessage');
+require('./pages/Home');
+require('./pages/Support');
+require('./pages/Incident');

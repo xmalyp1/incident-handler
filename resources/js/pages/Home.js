@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
+import ReactDOM from "react-dom";
 
 const useStyles = makeStyles((theme) => ({
     '@global': {
@@ -165,4 +166,8 @@ export default function Home(props) {
             </Container>
         </React.Fragment>
     );
+}
+
+if (document.getElementById('home')) {
+    ReactDOM.render(<Home />, document.getElementById('home'));
 }

@@ -4,6 +4,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import {IconButton, Snackbar} from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
+import ReactDOM from "react-dom";
+import Home from "../pages/Home";
 
 //Global cookie identifier
 const COOKIE_ID = "_RPU_0310_pm";
@@ -61,3 +63,7 @@ export default function CookieMessage(){
         )
     }
 
+
+if (document.getElementById('cookie')) {
+    ReactDOM.render(<CookieMessage />, document.getElementById('cookie'));
+}
