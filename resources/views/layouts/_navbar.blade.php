@@ -1,7 +1,8 @@
-<nav class="navbar navbar-expand-md shadow-sm navbar-rpu">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top shadow-sm navbar-rpu">
     <a class="navbar-brand" href="{{ url('/') }}">
         {{ config('app.name', 'Laravel') }}
     </a>
+
     <button class="navbar-toggler"
             type="button"
             data-toggle="collapse"
@@ -9,13 +10,11 @@
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
             aria-label="{{ __('Toggle navigation') }}">
-        <span class="line"></span>
-        <span class="line"></span>
-        <span class="line" style="margin-bottom: 0;"></span>
+        <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-            <!-- Authentication Links -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('home') }}">{{ __('common.home') }}</a>
             </li>
@@ -26,16 +25,29 @@
                 <a class="nav-link" href="{{ route('incident') }}">{{ __('common.incident') }}</a>
             </li>
 
+            <hr class="my-1"/>
+
+            <!-- Authentication Links -->
             @guest
                 @if (Route::has('login'))
-                    <li class="nav-item nav-link-auth">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('common.login') }}</a>
+                    <li class="nav-item">
+                        <a type="button"
+                           class="nav-link btn btn-outline-light mx-md-1"
+                           href="{{ route('login') }}">
+                            {{ __('common.login') }}
+                        </a>
                     </li>
                 @endif
 
+                <hr class="mt-1"/>
+
                 @if (Route::has('register'))
-                    <li class="nav-item nav-link-auth">
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('common.register') }}</a>
+                    <li class="nav-item">
+                        <a type="button"
+                           class="nav-link btn btn-outline-light mx-md-1"
+                           href="{{ route('register') }}">
+                            {{ __('common.register') }}
+                        </a>
                     </li>
                 @endif
             @else
