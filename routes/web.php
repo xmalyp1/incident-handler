@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IncidentController;
+use App\Http\Controllers\SupportController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +18,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class,'index'])->name('home');
-Route::get('/help',[\App\Http\Controllers\SupportController::class,'index'])->name("support");
-Route::get('/incident', [\App\Http\Controllers\IncidentController::class,'index'])->name("incident");
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/help', [SupportController::class, 'index'])->name("support");
+Route::get('/incident', [IncidentController::class, 'index'])->name("incident");
 
 Auth::routes();
 
-Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
