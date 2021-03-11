@@ -14,6 +14,7 @@ require('./bootstrap');
 
 require('./components/Example');
 require('./components/CookieMessage');
+require('./components/Footer');
 require('./pages/Home');
 require('./pages/Support');
 require('./pages/Incident');

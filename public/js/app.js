@@ -12346,6 +12346,8 @@ __webpack_require__(/*! ./components/Example */ "./resources/js/components/Examp
 
 __webpack_require__(/*! ./components/CookieMessage */ "./resources/js/components/CookieMessage.js");
 
+__webpack_require__(/*! ./components/Footer */ "./resources/js/components/Footer.js");
+
 __webpack_require__(/*! ./pages/Home */ "./resources/js/pages/Home.js");
 
 __webpack_require__(/*! ./pages/Support */ "./resources/js/pages/Support.js");
@@ -12691,6 +12693,10 @@ function Footer() {
   });
 }
 
+if (document.getElementById('footer')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Footer, {}), document.getElementById('footer'));
+}
+
 /***/ }),
 
 /***/ "./resources/js/components/Navigation.js":
@@ -12913,12 +12919,8 @@ var tiers = [{
   buttonText: 'Contact us',
   buttonVariant: 'outlined'
 }];
-function Home(props) {
+function Home() {
   var classes = useStyles();
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    // Update the document title using the browser API
-    document.title = props.title;
-  });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_4__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_5__.default, {
       component: "main",

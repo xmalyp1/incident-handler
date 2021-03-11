@@ -102,13 +102,8 @@ const tiers = [
     },
 ];
 
-export default function Home(props) {
+export default function Home() {
     const classes = useStyles();
-
-    useEffect(() => {
-        // Update the document title using the browser API
-        document.title = props.title;
-    });
 
     return (
         <React.Fragment>
