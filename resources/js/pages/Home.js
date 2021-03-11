@@ -102,9 +102,11 @@ const tiers = [
     },
 ];
 
-export default function Home() {
+export default function Home(props) {
     const classes = useStyles();
-
+    useEffect(function (){
+        console.log(props);
+    })
     return (
         <React.Fragment>
             <CssBaseline />
@@ -120,29 +122,28 @@ export default function Home() {
             {/* End hero unit */}
             <Container maxWidth="md" component="main">
                 <Grid container spacing={5} alignItems="flex-end">
-                    {tiers.map((tier) => (
+                    {tiers.map((product) => (
                         // Enterprise card is full width at sm breakpoint
-                        <Grid item key={tier.title} xs={12} sm={tier.title === 'Enterprise' ? 12 : 6} md={4}>
+                        <Grid item key={product.name} xs={12} sm={product.name === 'Unlimited' ? 12 : 6} md={4}>
                             <Card>
                                 <CardHeader
-                                    title={tier.title}
-                                    subheader={tier.subheader}
+                                    title={product.name}
                                     titleTypographyProps={{ align: 'center' }}
                                     subheaderTypographyProps={{ align: 'center' }}
-                                    action={tier.title === 'Pro' ? <StarIcon /> : null}
+                                    action={product.name === '10' ? <StarIcon /> : null}
                                     className={classes.cardHeader}
                                 />
                                 <CardContent>
                                     <div className={classes.cardPricing}>
                                         <Typography component="h2" variant="h3" color="textPrimary">
-                                            ${tier.price}
+                                            ${product.price}
                                         </Typography>
                                         <Typography variant="h6" color="textSecondary">
-                                            /mo
+                                            /
                                         </Typography>
                                     </div>
                                     <ul>
-                                        {tier.description.map((line) => (
+                                        {product.description.map((line) => (
                                             <Typography component="li" variant="subtitle1" align="center" key={line}>
                                                 {line}
                                             </Typography>
@@ -150,8 +151,8 @@ export default function Home() {
                                     </ul>
                                 </CardContent>
                                 <CardActions>
-                                    <Button fullWidth variant={tier.buttonVariant} color="primary">
-                                        {tier.buttonText}
+                                    <Button fullWidth variant={product.name == '10' ? 'contained' : 'outlined'} color="primary">
+                                        Objednať
                                     </Button>
                                 </CardActions>
                             </Card>
@@ -162,7 +163,8 @@ export default function Home() {
         </React.Fragment>
     );
 }
-
 if (document.getElementById('home')) {
-    ReactDOM.render(<Home />, document.getElementById('home'));
+    const propsContainer = document.getElementById("home-props");
+    const props = Object.assign({}, propsContainer.dataset);
+    ReactDOM.render(<Home {...props}/>, document.getElementById('home'));
 }

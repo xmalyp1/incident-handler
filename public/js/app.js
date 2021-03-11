@@ -12829,6 +12829,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_Box__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/Box */ "./node_modules/@material-ui/core/esm/Box/Box.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -12919,8 +12923,11 @@ var tiers = [{
   buttonText: 'Contact us',
   buttonVariant: 'outlined'
 }];
-function Home() {
+function Home(props) {
   var classes = useStyles();
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    console.log(props);
+  });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_4__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core_Box__WEBPACK_IMPORTED_MODULE_5__.default, {
       component: "main",
@@ -12946,26 +12953,25 @@ function Home() {
         container: true,
         spacing: 5,
         alignItems: "flex-end",
-        children: tiers.map(function (tier) {
+        children: tiers.map(function (product) {
           return (
             /*#__PURE__*/
             // Enterprise card is full width at sm breakpoint
             (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_8__.default, {
               item: true,
               xs: 12,
-              sm: tier.title === 'Enterprise' ? 12 : 6,
+              sm: product.name === 'Unlimited' ? 12 : 6,
               md: 4,
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_9__.default, {
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_CardHeader__WEBPACK_IMPORTED_MODULE_10__.default, {
-                  title: tier.title,
-                  subheader: tier.subheader,
+                  title: product.name,
                   titleTypographyProps: {
                     align: 'center'
                   },
                   subheaderTypographyProps: {
                     align: 'center'
                   },
-                  action: tier.title === 'Pro' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_icons_StarBorder__WEBPACK_IMPORTED_MODULE_11__.default, {}) : null,
+                  action: product.name === '10' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_icons_StarBorder__WEBPACK_IMPORTED_MODULE_11__.default, {}) : null,
                   className: classes.cardHeader
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_12__.default, {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -12974,14 +12980,14 @@ function Home() {
                       component: "h2",
                       variant: "h3",
                       color: "textPrimary",
-                      children: ["$", tier.price]
+                      children: ["$", product.price]
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_6__.default, {
                       variant: "h6",
                       color: "textSecondary",
-                      children: "/mo"
+                      children: "/"
                     })]
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
-                    children: tier.description.map(function (line) {
+                    children: product.description.map(function (line) {
                       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_6__.default, {
                         component: "li",
                         variant: "subtitle1",
@@ -12993,13 +12999,13 @@ function Home() {
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_CardActions__WEBPACK_IMPORTED_MODULE_13__.default, {
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_14__.default, {
                     fullWidth: true,
-                    variant: tier.buttonVariant,
+                    variant: product.name == '10' ? 'contained' : 'outlined',
                     color: "primary",
-                    children: tier.buttonText
+                    children: "Objedna\u0165"
                   })
                 })]
               })
-            }, tier.title)
+            }, product.name)
           );
         })
       })
@@ -13008,7 +13014,9 @@ function Home() {
 }
 
 if (document.getElementById('home')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Home, {}), document.getElementById('home'));
+  var propsContainer = document.getElementById("home-props");
+  var props = Object.assign({}, propsContainer.dataset);
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Home, _objectSpread({}, props)), document.getElementById('home'));
 }
 
 /***/ }),

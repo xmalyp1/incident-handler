@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+
 class HomeController extends Controller
 {
     private function showPage($title)
@@ -11,6 +13,9 @@ class HomeController extends Controller
 
     public function index()
     {
-        return $this->showPage(__('common.home'));
+        return view('welcome',[
+            'title' => 'Domov',
+            'products' => Product::where('valid',true)->get()
+        ]);
     }
 }
