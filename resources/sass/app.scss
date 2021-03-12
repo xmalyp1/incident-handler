@@ -21,6 +21,12 @@ nav.navbar-rpu {
         text-decoration: underline;
         text-underline-position: under;
         text-decoration-color: #ffffffe0;
+        height: 100%;
+        border-radius: 5px;
+    }
+
+    li.nav-item.active > a.nav-link {
+        background-color: scale-color(#3f51b5, $lightness: -5%);
     }
 
     a.nav-link[type=button]:hover {
@@ -28,9 +34,8 @@ nav.navbar-rpu {
         text-decoration-color: #3f51b5e0;
     }
 
-    // todo
-    a.nav-link:not([type=button]):hover::before {
-        content: '> ';
+    a.nav-link:not([type=button]):hover {
+        background-color: scale-color(#3f51b5, $lightness: -7%);
     }
 
     span.navbar-toggler-icon {

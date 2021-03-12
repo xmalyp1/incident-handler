@@ -10017,14 +10017,19 @@ nav.navbar-rpu a.nav-link {
   text-underline-position: under;
   -webkit-text-decoration-color: #ffffffe0;
           text-decoration-color: #ffffffe0;
+  height: 100%;
+  border-radius: 5px;
+}
+nav.navbar-rpu li.nav-item.active > a.nav-link {
+  background-color: #3c4dac;
 }
 nav.navbar-rpu a.nav-link[type=button]:hover {
   color: #3f51b5 !important;
   -webkit-text-decoration-color: #3f51b5e0;
           text-decoration-color: #3f51b5e0;
 }
-nav.navbar-rpu a.nav-link:not([type=button]):hover::before {
-  content: "> ";
+nav.navbar-rpu a.nav-link:not([type=button]):hover {
+  background-color: #3b4ba8;
 }
 nav.navbar-rpu span.navbar-toggler-icon {
   color: #ffffff;

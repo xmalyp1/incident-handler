@@ -15,14 +15,14 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('home') }}">{{ __('common.home') }}</a>
+            <li class="nav-item active">
+                <a class="nav-link pl-2" href="{{ route('home') }}">{{ __('common.home') }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('support') }}">{{ __('common.help') }}</a>
+                <a class="nav-link pl-2" href="{{ route('support') }}">{{ __('common.help') }}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('incident') }}">{{ __('common.incident') }}</a>
+                <a class="nav-link pl-2" href="{{ route('incident') }}">{{ __('common.incident') }}</a>
             </li>
 
             <hr class="my-1"/>
