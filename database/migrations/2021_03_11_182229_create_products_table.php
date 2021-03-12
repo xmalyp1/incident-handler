@@ -9,19 +9,19 @@ class CreateProductsTable extends Migration
 
      private $PRODUCTS = array(
         array(
-                'name' => 'SINGLE',
+                'name' => 'Jednorázové',
                 'description' => 'Jednorázové generovanie dokumentov pre registrovaný pracovný úraz.',
                 'price' => 1,
                 'credits' => 1,
                 'valid' => true
             ),array(
-                'name' => '10',
+                'name' => 'Viacnásobné',
                 'description' => 'Možnosť generovanie dokumentov pre 10 registrovaných pracovných úrazov. Vhodný pre stredné a malé podniky.',
                 'price' => 8,
                 'credits' => 10,
                 'valid' => true
             ),array(
-                'name' => 'UNLIMITED',
+                'name' => 'Neobmedzené',
                 'description' => 'Neobmedzené množstvo generovaných dokumentov. Produkt určený pre veľké podniky.',
                 'price' => 99.89,
                 'credits' => 1000,

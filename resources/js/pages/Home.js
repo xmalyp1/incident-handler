@@ -102,10 +102,12 @@ const tiers = [
     },
 ];
 
+
 export default function Home(props) {
     const classes = useStyles();
+    const productList = JSON.parse(props.products);
     useEffect(function (){
-        console.log(props);
+        console.log(productList)
     })
     return (
         <React.Fragment>
@@ -122,7 +124,7 @@ export default function Home(props) {
             {/* End hero unit */}
             <Container maxWidth="md" component="main">
                 <Grid container spacing={5} alignItems="flex-end">
-                    {tiers.map((product) => (
+                    {productList.map((product,index) => (
                         // Enterprise card is full width at sm breakpoint
                         <Grid item key={product.name} xs={12} sm={product.name === 'Unlimited' ? 12 : 6} md={4}>
                             <Card>
@@ -136,22 +138,21 @@ export default function Home(props) {
                                 <CardContent>
                                     <div className={classes.cardPricing}>
                                         <Typography component="h2" variant="h3" color="textPrimary">
-                                            ${product.price}
+                                            &euro; {product.price}
                                         </Typography>
-                                        <Typography variant="h6" color="textSecondary">
-                                            /
-                                        </Typography>
+
                                     </div>
                                     <ul>
-                                        {product.description.map((line) => (
-                                            <Typography component="li" variant="subtitle1" align="center" key={line}>
-                                                {line}
+                                        <Typography variant="h6" color="textSecondary">
+                                            Počet reportov: {product.credits}
+                                        </Typography>
+                                            <Typography component="li" variant="subtitle1" align="center">
+                                                {product.description}
                                             </Typography>
-                                        ))}
                                     </ul>
                                 </CardContent>
                                 <CardActions>
-                                    <Button fullWidth variant={product.name == '10' ? 'contained' : 'outlined'} color="primary">
+                                    <Button fullWidth variant={product.name == 'Viacnásobné' ? 'contained' : 'outlined'} color="primary">
                                         Objednať
                                     </Button>
                                 </CardActions>
