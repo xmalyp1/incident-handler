@@ -23,7 +23,7 @@
 </head>
 <body>
 
-@include('layouts._navbar')
+@include('layouts.navbar._navbar')
 
 <div id="app">
     <main>
