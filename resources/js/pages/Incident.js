@@ -7,7 +7,7 @@ import Footer from "../components/Footer";
 import ReactDOM from "react-dom";
 import Home from "./Home";
 
-export default function Incident(){
+export default function Incident(props){
 
         return (
             <React.Fragment>
@@ -26,5 +26,8 @@ export default function Incident(){
 
 
 if (document.getElementById('incident')) {
-    ReactDOM.render(<Incident />, document.getElementById('incident'));
+    const propsContainer = document.getElementById("incident-props");
+    const props = Object.assign({}, propsContainer.dataset);
+    console.log(props);
+    ReactDOM.render(<Incident {...props}/>, document.getElementById('incident'));
 }
