@@ -1,5 +1,7 @@
+@import 'variables';
+
 nav.navbar-rpu {
-    background-color: #3f51b5;
+    background-color: $primary;
     color: #ffffff;
     border-bottom: 0;
 
@@ -13,23 +15,23 @@ nav.navbar-rpu {
     }
 
     li.nav-item.active > a.nav-link {
-        background-color: scale-color(#3f51b5, $lightness: -5%);
+        background-color: scale-color($primary, $lightness: -5%);
     }
 
     a.nav-link[type=button]:hover {
-        color: #3f51b5 !important;
-        text-decoration-color: #3f51b5e0;
+        color: $primary !important;
+        text-decoration-color: transparentize($primary, 0.1);
     }
 
     a.nav-link:not([type=button]):hover {
-        background-color: scale-color(#3f51b5, $lightness: -7%);
+        background-color: scale-color($primary, $lightness: -7%);
     }
 
     span.navbar-toggler-icon {
-        color: #ffffff;
+        color: white;
     }
 
     .navbar-brand {
-        color: #ffffff;
+        color: white;
     }
 }
