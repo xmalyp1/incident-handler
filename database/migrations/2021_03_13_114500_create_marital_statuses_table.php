@@ -47,6 +47,8 @@ class CreateMaritalStatusesTable extends Migration
             $table->string('status')->nullable(false);
             $table->string('gender')->nullable(false);
         });
+
+        $this->populate();
     }
 
     /**
