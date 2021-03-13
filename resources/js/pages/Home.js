@@ -1,5 +1,4 @@
-import React from 'react';
-import {useEffect} from "react";
+import React, {useEffect} from 'react';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -9,7 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import StarIcon from '@material-ui/icons/StarBorder';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import ReactDOM from "react-dom";
@@ -144,12 +143,12 @@ export default function Home(props) {
 
                                     </div>
                                     <ul>
-                                        <Typography variant="h6" color="textSecondary">
+                                        <Typography variant="h6" color="textSecondary" align="center">
                                             Počet reportov: {product.credits}
                                         </Typography>
-                                            <Typography component="li" variant="subtitle1" align="center">
-                                                {product.description}
-                                            </Typography>
+                                        <Typography component="li" variant="subtitle1" align="center">
+                                            {product.description}
+                                        </Typography>
                                     </ul>
                                 </CardContent>
                                 <CardActions>

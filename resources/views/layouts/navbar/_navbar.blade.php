@@ -15,41 +15,19 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('home') }}">{{ __('common.home') }}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('support') }}">{{ __('common.help') }}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('incident') }}">{{ __('common.incident') }}</a>
-            </li>
+            @include('layouts.navbar._navbar_link', ['route' => 'home'])
+            @include('layouts.navbar._navbar_link', ['route' => 'support', 'key' => 'common.help'])
+            @include('layouts.navbar._navbar_link', ['route' => 'incident'])
 
             <hr class="my-1"/>
 
             <!-- Authentication Links -->
             @guest
-                @if (Route::has('login'))
-                    <li class="nav-item">
-                        <a type="button"
-                           class="nav-link btn btn-outline-light mx-md-1"
-                           href="{{ route('login') }}">
-                            {{ __('common.login') }}
-                        </a>
-                    </li>
-                @endif
+                @include('layouts.navbar._navbar_link', ['button' => true, 'route' => 'login'])
 
                 <hr class="mt-1"/>
 
-                @if (Route::has('register'))
-                    <li class="nav-item">
-                        <a type="button"
-                           class="nav-link btn btn-outline-light mx-md-1"
-                           href="{{ route('register') }}">
-                            {{ __('common.register') }}
-                        </a>
-                    </li>
-                @endif
+                @include('layouts.navbar._navbar_link', ['button' => true, 'route' => 'register'])
             @else
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown"
