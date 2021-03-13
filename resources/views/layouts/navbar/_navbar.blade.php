@@ -31,7 +31,7 @@
             @else
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown"
-                       class="nav-link dropdown-toggle"
+                       class="nav-link dropdown-toggle pl-2"
                        href="#"
                        role="button"
                        data-toggle="dropdown"
