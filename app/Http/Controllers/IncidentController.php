@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InsuranceCompany;
+use App\Models\MaritalStatus;
+
 class IncidentController extends Controller
 {
     private function showPage($title)
@@ -11,6 +14,9 @@ class IncidentController extends Controller
 
     public function index()
     {
-        return $this->showPage(__('common.incident'));
+        return $this->showPage(__('common.incident'),[
+            'maritalStatuses' => MaritalStatus::all(),
+            'insurerCompanies' => InsuranceCompany::all(),
+        ]);
     }
 }
