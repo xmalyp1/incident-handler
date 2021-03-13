@@ -10037,3 +10037,7 @@ nav.navbar-rpu span.navbar-toggler-icon {
 nav.navbar-rpu .navbar-brand {
   color: #ffffff;
 }
+
+.product-card:hover {
+  box-shadow: 3px 3px 3px 0 #aaaa;
+}

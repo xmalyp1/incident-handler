@@ -127,7 +127,7 @@ export default function Home(props) {
                     {productList.map((product,index) => (
                         // Enterprise card is full width at sm breakpoint
                         <Grid item key={product.name} xs={12} sm={product.name === 'Unlimited' ? 12 : 6} md={4}>
-                            <Card>
+                            <Card className="product-card">
                                 <CardHeader
                                     title={product.name}
                                     titleTypographyProps={{ align: 'center' }}

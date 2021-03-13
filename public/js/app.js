@@ -12963,6 +12963,7 @@ function Home(props) {
               sm: product.name === 'Unlimited' ? 12 : 6,
               md: 4,
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_9__.default, {
+                className: "product-card",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_material_ui_core_CardHeader__WEBPACK_IMPORTED_MODULE_10__.default, {
                   title: product.name,
                   titleTypographyProps: {
