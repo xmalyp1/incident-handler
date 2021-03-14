@@ -65,6 +65,16 @@ const useStyles = makeStyles((theme) => ({
             paddingBottom: theme.spacing(6),
         },
     },
+    incidentButton: {
+        backgroundColor: theme.palette.common.white,
+        '&:hover': {
+            background: theme.palette.background.paper,
+        },
+        display: "block",
+        width: 170,
+        margin:"auto",
+        marginTop: "2.5em",
+    }
 }));
 
 const tiers = [
@@ -120,6 +130,9 @@ export default function Home(props) {
                 <Typography variant="h5" align="center" color="#fff" component="p">
                     Zamestnávateľ je povinný registrovať pracovný úraz, ktorým bola spôsobená pracovná neschopnosť zamestnanca trvajúca viac ako tri dni, ku ktorej došlo následkom pracovného úrazu.
                 </Typography>
+                <Button className={classes.incidentButton} variant='outlined' color="primary" href="/incident">
+                    Registrovať úraz
+                </Button>
             </Box>
             {/* End hero unit */}
             <Container maxWidth="md" component="main">

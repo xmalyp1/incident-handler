@@ -17,7 +17,6 @@ class IncidentController extends Controller
 
     public function index()
     {
-
         return $this->showPage(__('common.incident'));
     }
 }
