@@ -34,15 +34,15 @@ const useStyles = makeStyles((theme) => ({
     link: {
         margin: theme.spacing(1, 1.5),
     },
-    homeIcon:{
-      verticalAlign:"bottom",
+    homeIcon: {
+        verticalAlign: "bottom",
     },
     heroContent: {
         padding: theme.spacing(22, 12, 15, 18),
-        width:"100%",
+        width: "100%",
         backgroundColor: theme.palette.primary.main,
-        margin: theme.spacing(0,0,10,0),
-        color:theme.palette.common.white,
+        margin: theme.spacing(0, 0, 10, 0),
+        color: theme.palette.common.white,
         borderBottom: `1px solid ${theme.palette.divider}`,
     },
     cardHeader: {
@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
         },
         display: "block",
         width: 170,
-        margin:"auto",
+        margin: "auto",
         marginTop: "2.5em",
     }
 }));
@@ -116,19 +116,20 @@ const tiers = [
 export default function Home(props) {
     const classes = useStyles();
     const productList = JSON.parse(props.products);
-    useEffect(function (){
+    useEffect(function () {
         console.log(productList)
     })
     return (
         <React.Fragment>
-            <CssBaseline />
+            <CssBaseline/>
             {/* Hero unit */}
             <Box component="main" className={classes.heroContent}>
                 <Typography component="h1" variant="h2" align="center" color="#fff" gutterBottom>
                     Zaregistruj pracovný úraz online
                 </Typography>
                 <Typography variant="h5" align="center" color="#fff" component="p">
-                    Zamestnávateľ je povinný registrovať pracovný úraz, ktorým bola spôsobená pracovná neschopnosť zamestnanca trvajúca viac ako tri dni, ku ktorej došlo následkom pracovného úrazu.
+                    Zamestnávateľ je povinný registrovať pracovný úraz, ktorým bola spôsobená pracovná neschopnosť
+                    zamestnanca trvajúca viac ako tri dni, ku ktorej došlo následkom pracovného úrazu.
                 </Typography>
                 <Button className={classes.incidentButton} variant='outlined' color="primary" href="/incident">
                     Registrovať úraz
@@ -137,15 +138,15 @@ export default function Home(props) {
             {/* End hero unit */}
             <Container maxWidth="md" component="main">
                 <Grid container spacing={5} alignItems="flex-end">
-                    {productList.map((product,index) => (
+                    {productList.map((product, index) => (
                         // Enterprise card is full width at sm breakpoint
                         <Grid item key={product.name} xs={12} sm={product.name === 'Unlimited' ? 12 : 6} md={4}>
                             <Card className="product-card">
                                 <CardHeader
                                     title={product.name}
-                                    titleTypographyProps={{ align: 'center' }}
-                                    subheaderTypographyProps={{ align: 'center' }}
-                                    action={product.name === '10' ? <StarIcon /> : null}
+                                    titleTypographyProps={{align: 'center'}}
+                                    subheaderTypographyProps={{align: 'center'}}
+                                    action={product.name === '10' ? <StarIcon/> : null}
                                     className={classes.cardHeader}
                                 />
                                 <CardContent>
@@ -165,7 +166,9 @@ export default function Home(props) {
                                     </ul>
                                 </CardContent>
                                 <CardActions>
-                                    <Button fullWidth variant={product.name == 'Viacnásobné' ? 'contained' : 'outlined'} color="primary">
+                                    <Button fullWidth
+                                            variant={product.name === 'Viacnásobné' ? 'contained' : 'outlined'}
+                                            color="primary">
                                         Objednať
                                     </Button>
                                 </CardActions>
