@@ -5,7 +5,7 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import {EmployeePart, label as employeePartLabel} from './EmployeePart';
+import EmployeePart, {label as employeePartLabel} from './EmployeePart';
 import {IncidentPart, label as incidentPartLabel} from './IncidentPart';
 import {AdditionalQuestionsPart, label as additionalQuestionsPartLabel} from "./AdditionalQuestionsPart";
 
@@ -20,18 +20,18 @@ const useStyles = makeStyles((theme) => ({
     instructions: {
         marginTop: theme.spacing(1),
         marginBottom: theme.spacing(1),
-    },
+    }
 }));
 
 function getSteps() {
     return [employeePartLabel, incidentPartLabel, additionalQuestionsPartLabel];
 }
 
-function getStepContent(step,props) {
+function getStepContent(step, props) {
     switch (step) {
         case 0:
-
-            return <EmployeePart maritalStatus={JSON.parse(props.maritalStatus)} insuranceCompany={JSON.parse(props.insuranceCompany)}/>;
+            return <EmployeePart maritalStatus={JSON.parse(props.maritalStatus)}
+                                 insuranceCompany={JSON.parse(props.insuranceCompany)}/>;
         case 1:
             return <IncidentPart/>;
         case 2:
@@ -121,7 +121,9 @@ export default function IncidentStepper(props) {
                     </div>
                 ) : (
                     <div>
-                        <Typography className={classes.instructions}>{getStepContent(activeStep,props)}</Typography>
+                        <Typography className={classes.instructions}>
+                            {getStepContent(activeStep, props)}
+                        </Typography>
                         <div>
                             <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                                 Back
