@@ -120,18 +120,14 @@ export function EmployeePart(props) {
                 />
             </Grid>
             <Grid item xs={12} sm={6} className={classes.marginDivider}>
-                {/*<TextField
-                    required
-                    id="maritalStatus"
-                    name="maritalStatus"
-                    label="Rodinný stav"
-                    fullWidth
-                />*/}
                 <FormControl fullWidth>
                     <InputLabel id="marital-status-label">Rodinný stav</InputLabel>
                     <Select
                         labelId="marital-status-label"
                         id="marital-status-select">
+                        <MenuItem value="">
+                            <em>Neznámy</em>
+                        </MenuItem>
                         {props.maritalStatus.map((status) => (
                             <MenuItem value={status.status}>{status.status}</MenuItem>
                         ))}
@@ -177,6 +173,9 @@ export function EmployeePart(props) {
                     <Select
                         labelId="insurance-company-label"
                         id="insurance-company-select">
+                        <MenuItem value="">
+                            <em>Neznáma</em>
+                        </MenuItem>
                         {props.insuranceCompany.map((company) => (
                             <MenuItem value={company.name}>{company.name}</MenuItem>
                         ))}
