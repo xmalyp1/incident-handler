@@ -27,10 +27,11 @@ function getSteps() {
     return [employeePartLabel, incidentPartLabel, additionalQuestionsPartLabel];
 }
 
-function getStepContent(step) {
+function getStepContent(step,props) {
     switch (step) {
         case 0:
-            return <EmployeePart/>;
+
+            return <EmployeePart maritalStatus={JSON.parse(props.maritalStatus)} insuranceCompany={JSON.parse(props.insuranceCompany)}/>;
         case 1:
             return <IncidentPart/>;
         case 2:
@@ -40,7 +41,7 @@ function getStepContent(step) {
     }
 }
 
-export default function IncidentStepper() {
+export default function IncidentStepper(props) {
     const classes = useStyles();
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set());
@@ -120,7 +121,7 @@ export default function IncidentStepper() {
                     </div>
                 ) : (
                     <div>
-                        <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+                        <Typography className={classes.instructions}>{getStepContent(activeStep,props)}</Typography>
                         <div>
                             <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                                 Back

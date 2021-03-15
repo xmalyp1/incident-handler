@@ -5,11 +5,12 @@ import ReactDOM from "react-dom";
 import IncidentStepper from "../components/incident-form/IncidentStepper";
 
 export default function Incident(props) {
+
     return (
         <React.Fragment>
             <CssBaseline/>
             <Box component="main">
-                <IncidentStepper/>
+                <IncidentStepper {...props}/>
                 {/*<Stepper children={EmployeePart}/>*/}
                 {/*<IncidentForm/>*/}
             </Box>

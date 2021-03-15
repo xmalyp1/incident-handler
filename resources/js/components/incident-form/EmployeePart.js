@@ -1,5 +1,5 @@
 import React from "react";
-import {Checkbox, FormControlLabel, Grid, Paper, TextField} from "@material-ui/core";
+import {Checkbox, FormControl, FormControlLabel, Grid, MenuItem, Paper, Select, TextField,InputLabel} from "@material-ui/core";
 import Item from "./Item";
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export function EmployeePart() {
+export function EmployeePart(props) {
     const classes = useStyles();
     return (
     <React.Fragment>
@@ -120,13 +120,23 @@ export function EmployeePart() {
                 />
             </Grid>
             <Grid item xs={12} sm={6} className={classes.marginDivider}>
-                <TextField
+                {/*<TextField
                     required
                     id="maritalStatus"
                     name="maritalStatus"
                     label="Rodinný stav"
                     fullWidth
-                />
+                />*/}
+                <FormControl fullWidth>
+                    <InputLabel id="marital-status-label">Rodinný stav</InputLabel>
+                    <Select
+                        labelId="marital-status-label"
+                        id="marital-status-select">
+                        {props.maritalStatus.map((status) => (
+                            <MenuItem value={status.status}>{status.status}</MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
             </Grid>
             <Grid item xs={12} sm={6} className={classes.marginDivider}>
                 <TextField
@@ -134,26 +144,44 @@ export function EmployeePart() {
                     id="numOfChildren"
                     name="numOfChildren"
                     label="Počet vyživovaných detí"
+                    type="number"
+                    InputProps={{
+                        min:0,
+                        max:20
+                    }}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
                     fullWidth
                 />
             </Grid>
             <Grid item xs={12} sm={6} className={classes.marginDivider}>
-                <TextField
-                    required
-                    id="employedFrom"
-                    name="employedFrom"
-                    label="Zamestnaný od"
-                    fullWidth
-                />
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <KeyboardDatePicker fullWidth
+                                        className={classes.birthInput}
+                                        disableToolbar
+                                        variant="inline"
+                                        format="MM/dd/yyyy"
+                                        margin="normal"
+                                        id="employedFrom"
+                                        label="Zamestnaný od"
+                                        KeyboardButtonProps={{
+                                            'aria-label': 'change date',
+                                        }}
+                    />
+                </MuiPickersUtilsProvider>
             </Grid>
             <Grid item xs={12} sm={6} className={classes.marginDivider}>
-                <TextField
-                    required
-                    id="insurer"
-                    name="insurer"
-                    label="Zdravotná poisťovňa"
-                    fullWidth
-                />
+                <FormControl fullWidth>
+                    <InputLabel id="insurance-company-label">Poisťovňa</InputLabel>
+                    <Select
+                        labelId="insurance-company-label"
+                        id="insurance-company-select">
+                        {props.insuranceCompany.map((company) => (
+                            <MenuItem value={company.name}>{company.name}</MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
             </Grid>
         </Grid>
         </Paper>
