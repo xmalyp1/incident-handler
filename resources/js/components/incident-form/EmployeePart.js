@@ -28,12 +28,29 @@ class EmployeePart extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName: "",
-            birthDate: null,
-        };
+            personalData: {
+            firstName:"",
+            lastName:"",
+            birthDate:new Date(),
+            personalId:"",
+            address1:"",
+            address2:"",
+            city:"",
+            zip:"",
+            maritalStatus:"",
+            numOfChildren:0,
+            employedFrom:new Date(),
+            insuranceCompany:""
+        }};
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleDatePickerChange = this.handleDatePickerChange.bind(this);
+    }
+
+    componentWillUnmount(){
+        console.log("Unmounting component...");
+
+        this.props.onComponentChange(this.state);
     }
 
     handleInputChange(event) {
@@ -41,9 +58,10 @@ class EmployeePart extends React.Component {
         // const value = target.type === 'checkbox' ? target.checked : target.value;
         const value = target.value;
         const name = target.name;
-
-        this.setState({
-            [name]: value
+        this.setState(prevState => {
+            let personalData = Object.assign({}, prevState.personalData);  // creating copy of state
+            personalData[name] = value;                                         // update the name property, assign a new value
+            return { personalData };                                            // return new personal data object to state
         });
     }
 
@@ -57,15 +75,17 @@ class EmployeePart extends React.Component {
         const { classes } = this.props;
         return (
             <React.Fragment>
+                {/*
                 <Typography variant="h6" gutterBottom>
                     {label}
                 </Typography>
+                */}
                 <Paper className={classes.paperForm}>
                     <Grid container spacing={5}>
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 required
-                                value={this.state.firstName}
+                                value={this.state.personalData.firstName}
                                 onChange={this.handleInputChange}
                                 id="firstName"
                                 name="firstName"
@@ -80,6 +100,8 @@ class EmployeePart extends React.Component {
                                 id="lastName"
                                 name="lastName"
                                 label="Priezvisko"
+                                onChange={this.handleInputChange}
+                                value={this.state.personalData.lastName}
                                 fullWidth
                                 autoComplete="family-name"
                             />
@@ -94,7 +116,7 @@ class EmployeePart extends React.Component {
                                                     margin="normal"
                                                     id="birthDate"
                                                     label="Dátum narodenia"
-                                                    value={this.state.birthDate}
+                                                    value={this.state.personalData.birthDate}
                                                     onChange={this.handleDatePickerChange}
                                                     KeyboardButtonProps={{
                                                         'aria-label': 'change date',
@@ -108,6 +130,8 @@ class EmployeePart extends React.Component {
                                 id="personalId"
                                 name="personalId"
                                 label="Rodné číslo"
+                                onChange={this.handleInputChange}
+                                value={this.state.personalData.personalId}
                                 fullWidth
                             />
                         </Grid>
@@ -119,6 +143,8 @@ class EmployeePart extends React.Component {
                                 label="Adresa riadok č. 1"
                                 fullWidth
                                 autoComplete="shipping address-line1"
+                                onChange={this.handleInputChange}
+                                value={this.state.personalData.address1}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -128,6 +154,8 @@ class EmployeePart extends React.Component {
                                 label="Adresa riadok č. 2"
                                 fullWidth
                                 autoComplete="shipping address-line2"
+                                onChange={this.handleInputChange}
+                                value={this.state.personalData.address2}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -138,6 +166,8 @@ class EmployeePart extends React.Component {
                                 label="Mesto"
                                 fullWidth
                                 autoComplete="shipping address-level2"
+                                onChange={this.handleInputChange}
+                                value={this.state.personalData.city}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -148,6 +178,8 @@ class EmployeePart extends React.Component {
                                 label="PSČ"
                                 fullWidth
                                 autoComplete="shipping postal-code"
+                                onChange={this.handleInputChange}
+                                value={this.state.personalData.zip}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6} className={classes.marginDivider}>
@@ -155,12 +187,14 @@ class EmployeePart extends React.Component {
                                 <InputLabel id="marital-status-label">Rodinný stav</InputLabel>
                                 <Select
                                     labelId="marital-status-label"
-                                    id="marital-status-select">
+                                    id="marital-status-select"
+                                    onChange={this.handleInputChange}
+                                    value={this.state.personalData.maritalStatus}>
                                     <MenuItem value="">
                                         <em>Neznámy</em>
                                     </MenuItem>
                                     {this.props.maritalStatus.map((status) => (
-                                        <MenuItem value={status.status}>{status.status}</MenuItem>
+                                        <MenuItem key={status.status} value={status.status}>{status.status}</MenuItem>
                                     ))}
                                 </Select>
                             </FormControl>
@@ -172,6 +206,8 @@ class EmployeePart extends React.Component {
                                 name="numOfChildren"
                                 label="Počet vyživovaných detí"
                                 type="number"
+                                onChange={this.handleInputChange}
+                                value={this.state.personalData.numOfChildren}
                                 InputProps={{
                                     min: 0,
                                     max: 20
@@ -192,6 +228,7 @@ class EmployeePart extends React.Component {
                                                     margin="normal"
                                                     id="employedFrom"
                                                     label="Zamestnaný od"
+                                                    value={this.state.personalData.employedFrom}
                                                     KeyboardButtonProps={{
                                                         'aria-label': 'change date',
                                                     }}
@@ -203,12 +240,14 @@ class EmployeePart extends React.Component {
                                 <InputLabel id="insurance-company-label">Poisťovňa</InputLabel>
                                 <Select
                                     labelId="insurance-company-label"
-                                    id="insurance-company-select">
+                                    id="insurance-company-select"
+                                    onChange={this.handleInputChange}
+                                    value={this.state.personalData.insuranceCompany}>
                                     <MenuItem value="">
                                         <em>Neznáma</em>
                                     </MenuItem>
                                     {this.props.insuranceCompany.map((company) => (
-                                        <MenuItem value={company.name}>{company.name}</MenuItem>
+                                        <MenuItem key={company.name} value={company.name}>{company.name}</MenuItem>
                                     ))}
                                 </Select>
                             </FormControl>

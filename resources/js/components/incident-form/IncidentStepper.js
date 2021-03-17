@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import EmployeePart, {label as employeePartLabel} from './EmployeePart';
 import {IncidentPart, label as incidentPartLabel} from './IncidentPart';
 import {AdditionalQuestionsPart, label as additionalQuestionsPartLabel} from "./AdditionalQuestionsPart";
+import DateFnsUtils from "@date-io/date-fns";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,11 +28,20 @@ function getSteps() {
     return [employeePartLabel, incidentPartLabel, additionalQuestionsPartLabel];
 }
 
+const handlePersist = (data) => {
+    if (typeof(Storage) !== "undefined") {
+        console.log(data);
+    } else {
+        alert("Local Storage is not supported in this web browser.")
+    }
+}
+
 function getStepContent(step, props) {
     switch (step) {
         case 0:
             return <EmployeePart maritalStatus={JSON.parse(props.maritalStatus)}
-                                 insuranceCompany={JSON.parse(props.insuranceCompany)}/>;
+                                 insuranceCompany={JSON.parse(props.insuranceCompany)}
+                                 onComponentChange={handlePersist}/>;
         case 1:
             return <IncidentPart/>;
         case 2:
@@ -45,6 +55,21 @@ export default function IncidentStepper(props) {
     const classes = useStyles();
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set());
+    const [data,setData] = useState({
+        "personal":{
+           "fistName":"",
+           "secondName":"",
+           "birthDate":new Date(),
+            "personalId":"",
+            "address1":"",
+            "address2":"",
+            "city":"",
+            "zip":"",
+            "maritalStatus":"",
+            "numOfChildren":0,
+            "employedFrom":new Date(),
+            "insuranceCompany":""
+        }});
     const steps = getSteps();
 
     const isStepOptional = (step) => {
