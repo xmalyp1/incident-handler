@@ -58,6 +58,10 @@ class EmployeePart extends React.Component {
         // const value = target.type === 'checkbox' ? target.checked : target.value;
         const value = target.value;
         const name = target.name;
+        this.saveObjectPropertyToState(name,value);
+    }
+
+    saveObjectPropertyToState(name,value){
         this.setState(prevState => {
             let personalData = Object.assign({}, prevState.personalData);  // creating copy of state
             personalData[name] = value;                                         // update the name property, assign a new value
@@ -66,9 +70,7 @@ class EmployeePart extends React.Component {
     }
 
     handleDatePickerChange(date) {
-        this.setState({
-            birthDate: date
-        });
+        console.log(date);
     }
 
     render() {
