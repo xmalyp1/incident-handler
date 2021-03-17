@@ -69,6 +69,7 @@ class EmployeePart extends React.Component {
         });
     }
 
+    //TODO: need to solve how to solve a general listener, if there is no solution two listeners have to be here.
     handleDatePickerChange(date) {
         console.log(date);
     }
