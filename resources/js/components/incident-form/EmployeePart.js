@@ -48,8 +48,6 @@ class EmployeePart extends React.Component {
     }
 
     componentWillUnmount(){
-        console.log("Unmounting component...");
-
         this.props.onComponentChange(this.state);
     }
 

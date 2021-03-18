@@ -28,26 +28,13 @@ function getSteps() {
     return [employeePartLabel, incidentPartLabel, additionalQuestionsPartLabel];
 }
 
+
 const handlePersist = (data) => {
     if (typeof(Storage) !== "undefined") {
+        //TODO: handle the persisting of data to Local storage
         console.log(data);
     } else {
-        alert("Local Storage is not supported in this web browser.")
-    }
-}
-
-function getStepContent(step, props) {
-    switch (step) {
-        case 0:
-            return <EmployeePart maritalStatus={JSON.parse(props.maritalStatus)}
-                                 insuranceCompany={JSON.parse(props.insuranceCompany)}
-                                 onComponentChange={handlePersist}/>;
-        case 1:
-            return <IncidentPart/>;
-        case 2:
-            return <AdditionalQuestionsPart/>;
-        default:
-            return 'Unknown step';
+        alert("Local Storage is not supported in this web browser. Therefore we are not persisting your data in the browser.")
     }
 }
 
@@ -56,7 +43,7 @@ export default function IncidentStepper(props) {
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set());
     const [data,setData] = useState({
-        "personal":{
+        "personalData":{
            "fistName":"",
            "secondName":"",
            "birthDate":new Date(),
@@ -71,10 +58,52 @@ export default function IncidentStepper(props) {
             "insuranceCompany":""
         }});
     const steps = getSteps();
+    const handleStateChange = (childState) => {
+        let key = Object.keys(childState);
+        if(key.length != 1){
+            const message = "Child state have multiple keys.";
+            console.error(message);
+            throw new Error(message);
+        }
+        let parentKeys = Object.keys(data)
+        let updatedKey = parentKeys.find(value => value === key[0]);
+        console.debug("Seaching "+ key[0] + " in "+ parentKeys + " and found: "+updatedKey);
+
+        if(typeof updatedKey !== 'undefined' ){
+            console.debug('updating key ' +updatedKey);
+            console.log('persisting state...');
+        }else{
+            console.error("State have not been updated, because the key for update is undefined.")
+        }
+    }
+
+    const saveObjectPropertyToState= (name,value) => {
+        this.setState(prevState => {
+            let personalData = Object.assign({}, prevState.personalData);  // creating copy of state
+            personalData[name] = value;                                         // update the name property, assign a new value
+            return { personalData };                                            // return new personal data object to state
+        });
+    }
 
     const isStepOptional = (step) => {
         return step === 2;
     };
+
+    const stepContent = (step, props) => {
+        switch (step) {
+            case 0:
+                return <EmployeePart maritalStatus={JSON.parse(props.maritalStatus)}
+                                     insuranceCompany={JSON.parse(props.insuranceCompany)}
+                                     onComponentChange={handleStateChange}/>;
+            case 1:
+                return <IncidentPart/>;
+            case 2:
+                return <AdditionalQuestionsPart/>;
+            default:
+                return 'Unknown step';
+        }
+    }
+
 
     const isStepSkipped = (step) => {
         return skipped.has(step);
@@ -147,7 +176,7 @@ export default function IncidentStepper(props) {
                 ) : (
                     <div>
                         <Typography className={classes.instructions}>
-                            {getStepContent(activeStep, props)}
+                            {stepContent(activeStep, props)}
                         </Typography>
                         <div>
                             <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
