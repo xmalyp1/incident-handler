@@ -24,65 +24,72 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+const STORAGE_KEY = 'INC_DATA';
+const INIT_STATE = {
+    "personalData":{
+        "fistName":"",
+        "secondName":"",
+        "birthDate":new Date(),
+        "personalId":"",
+        "address1":"",
+        "address2":"",
+        "city":"",
+        "zip":"",
+        "maritalStatus":"",
+        "numOfChildren":0,
+        "employedFrom":new Date(),
+        "insuranceCompany":""
+    }};
+
 function getSteps() {
     return [employeePartLabel, incidentPartLabel, additionalQuestionsPartLabel];
 }
 
 
-const handlePersist = (data) => {
+const storeDataToLocalStorage = (data) => {
     if (typeof(Storage) !== "undefined") {
-        //TODO: handle the persisting of data to Local storage
-        console.log(data);
+        console.log(data)
+        localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
     } else {
         alert("Local Storage is not supported in this web browser. Therefore we are not persisting your data in the browser.")
     }
+}
+
+const getInitData = () => {
+    if (typeof(Storage) !== "undefined") {
+        let storedData = localStorage.getItem(STORAGE_KEY);
+        if(storedData !== null)
+            return storedData;
+    }
+
+    return INIT_STATE;
 }
 
 export default function IncidentStepper(props) {
     const classes = useStyles();
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set());
-    const [data,setData] = useState({
-        "personalData":{
-           "fistName":"",
-           "secondName":"",
-           "birthDate":new Date(),
-            "personalId":"",
-            "address1":"",
-            "address2":"",
-            "city":"",
-            "zip":"",
-            "maritalStatus":"",
-            "numOfChildren":0,
-            "employedFrom":new Date(),
-            "insuranceCompany":""
-        }});
+    const [data,setData] = useState(INIT_STATE);
     const steps = getSteps();
-    const handleStateChange = (childState) => {
-        let key = Object.keys(childState);
-        if(key.length != 1){
-            const message = "Child state have multiple keys.";
-            console.error(message);
-            throw new Error(message);
-        }
+
+    const saveObjectPropertyToState = (subStep,instance) => {
+        let state = Object.assign({},data);
+        state[subStep] = instance;
+        setData(state);
+    }
+
+    const handleStateChange = (key,childState) => {
         let parentKeys = Object.keys(data)
-        let updatedKey = parentKeys.find(value => value === key[0]);
-        console.debug("Seaching "+ key[0] + " in "+ parentKeys + " and found: "+updatedKey);
+        let updatedKey = parentKeys.find(value => value === key);
+        console.debug("Seaching "+ key + " in "+ parentKeys + " and found: "+updatedKey);
 
         if(typeof updatedKey !== 'undefined' ){
-            console.debug('updating key ' +updatedKey);
-            console.log('persisting state...');
+            //TODO: save state !!!!!
+            saveObjectPropertyToState(updatedKey,childState)
+            storeDataToLocalStorage(data);
         }else{
             console.error("State have not been updated, because the key for update is undefined.")
         }
-    }
-
-    const saveObjectPropertyToState= (name,value) => {
-        this.setState(prevState => {
-            let personalData = Object.assign({}, prevState.personalData);  // creating copy of state
-            personalData[name] = value;                                         // update the name property, assign a new value
-            return { personalData };                                            // return new personal data object to state
-        });
     }
 
     const isStepOptional = (step) => {
