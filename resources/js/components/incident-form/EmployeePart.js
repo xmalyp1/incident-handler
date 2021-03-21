@@ -169,6 +169,9 @@ class EmployeePart extends React.Component {
                                     labelId="marital-status-label"
                                     id="marital-status-select"
                                     onChange={this.handleInputChange}
+                                    inputProps={{
+                                        name: "maritalStatus"
+                                    }}
                                     value={this.state.maritalStatus}>
                                     <MenuItem value="">
                                         <em>Neznámy</em>
@@ -223,6 +226,9 @@ class EmployeePart extends React.Component {
                                     labelId="insurance-company-label"
                                     id="insurance-company-select"
                                     onChange={this.handleInputChange}
+                                    inputProps={{
+                                        name: "insuranceCompany"
+                                    }}
                                     value={this.state.insuranceCompany}>
                                     <MenuItem value="">
                                         <em>Neznáma</em>
