@@ -185,7 +185,7 @@ class EmployeePart extends React.Component {
                                 type="number"
                                 onChange={this.handleInputChange}
                                 value={this.state.numOfChildren}
-                                InputProps={{
+                                inputProps={{
                                     min: 0,
                                     max: 20
                                 }}
