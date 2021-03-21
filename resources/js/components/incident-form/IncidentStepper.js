@@ -34,7 +34,7 @@ const STORAGE_KEY = 'INC_DATA';
 const INIT_STATE = {
     "personalData":{
         "firstName":"",
-        "secondName":"",
+        "lastName":"",
         "birthDate":INIT_DATE,
         "personalId":"",
         "address1":"",
