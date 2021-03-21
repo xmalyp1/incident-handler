@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import EmployeePart, {label as employeePartLabel} from './EmployeePart';
 import {IncidentPart, label as incidentPartLabel} from './IncidentPart';
 import {AdditionalQuestionsPart, label as additionalQuestionsPartLabel} from "./AdditionalQuestionsPart";
-import DateFnsUtils from "@date-io/date-fns";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -182,9 +181,9 @@ export default function IncidentStepper(props) {
                     </div>
                 ) : (
                     <div>
-                        <Typography className={classes.instructions}>
+                        <div className={classes.instructions}>
                             {stepContent(activeStep, props)}
-                        </Typography>
+                        </div>
                         <div>
                             <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                                 Back
