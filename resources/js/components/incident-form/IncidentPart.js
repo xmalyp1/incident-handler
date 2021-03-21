@@ -4,6 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import {KeyboardDatePicker, KeyboardTimePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import BasePart from "./BasePart";
 
 export const label = 'Údaje o pracovnom úraze';
 
@@ -24,36 +25,7 @@ const useStyles = theme => ({
 });
 
 
-class IncidentPart extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = props.initState;
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleDatePickerChange = this.handleDatePickerChange.bind(this);
-    }
-
-    componentWillUnmount() {
-        this.props.onComponentChange('incidentData', Object.assign({}, this.state));
-    }
-
-    handleInputChange(event) {
-        const target = event.target;
-        // const value = target.type === 'checkbox' ? target.checked : target.value;
-        const value = target.value;
-        const name = target.name;
-        this.setState({
-            [name]: value
-        });
-    }
-
-    handleDatePickerChange(field) {
-        return (date) => {
-            this.setState({
-                [field]: date,
-            });
-        }
-    }
+class IncidentPart extends BasePart {
 
     render() {
         const {classes} = this.props;

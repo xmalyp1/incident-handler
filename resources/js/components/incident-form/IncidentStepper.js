@@ -120,9 +120,11 @@ export default function IncidentStepper(props) {
                 return <EmployeePart maritalStatus={JSON.parse(props.maritalStatus)}
                                      insuranceCompany={JSON.parse(props.insuranceCompany)}
                                      initState={data['personalData']}
+                                     dataKey="personalData"
                                      onComponentChange={handleStateChange}/>;
             case 1:
                 return <IncidentPart initState={data['incidentData']}
+                                     dataKey="incidentData"
                                      onComponentChange={handleStateChange}/>;
             case 2:
                 return <AdditionalQuestionsPart/>;
