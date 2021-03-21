@@ -6,7 +6,7 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import EmployeePart, {label as employeePartLabel} from './EmployeePart';
-import {IncidentPart, label as incidentPartLabel} from './IncidentPart';
+import IncidentPart, {label as incidentPartLabel} from './IncidentPart';
 import {AdditionalQuestionsPart, label as additionalQuestionsPartLabel} from "./AdditionalQuestionsPart";
 import DateFnsUtils from "@date-io/date-fns";
 
@@ -24,12 +24,13 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+const INIT_DATE = new Date();
 const STORAGE_KEY = 'INC_DATA';
 const INIT_STATE = {
     "personalData":{
         "firstName":"",
         "secondName":"",
-        "birthDate":new Date(),
+        "birthDate":INIT_DATE,
         "personalId":"",
         "address1":"",
         "address2":"",
@@ -37,9 +38,22 @@ const INIT_STATE = {
         "zip":"",
         "maritalStatus":"",
         "numOfChildren":0,
-        "employedFrom":new Date(),
+        "employedFrom":INIT_DATE,
         "insuranceCompany":""
-    }};
+    },
+    "incidentData":{
+        "incidentDate":INIT_DATE,
+        "workingFrom":INIT_DATE,
+        "workingTo":INIT_DATE,
+        "workedHours":0,
+        "incidentLocation":"",
+        "affectedBodyPart":"",
+        "jobDescription":"",
+        "incidentDescription":"",
+        "witness":"",
+        "creator":""
+    }
+};
 
 function getSteps() {
     return [employeePartLabel, incidentPartLabel, additionalQuestionsPartLabel];
@@ -103,7 +117,8 @@ export default function IncidentStepper(props) {
                                      initState={data['personalData']}
                                      onComponentChange={handleStateChange}/>;
             case 1:
-                return <IncidentPart/>;
+                return <IncidentPart initState={data['incidentData']}
+                                     onComponentChange={handleStateChange}/>;
             case 2:
                 return <AdditionalQuestionsPart/>;
             default:
@@ -182,9 +197,9 @@ export default function IncidentStepper(props) {
                     </div>
                 ) : (
                     <div>
-                        <Typography className={classes.instructions}>
+                        <div className={classes.instructions}>
                             {stepContent(activeStep, props)}
-                        </Typography>
+                        </div>
                         <div>
                             <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                                 Back
