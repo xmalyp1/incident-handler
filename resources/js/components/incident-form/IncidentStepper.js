@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import EmployeePart, {label as employeePartLabel} from './EmployeePart';
 import IncidentPart, {label as incidentPartLabel} from './IncidentPart';
 import {AdditionalQuestionsPart, label as additionalQuestionsPartLabel} from "./AdditionalQuestionsPart";
-import DateFnsUtils from "@date-io/date-fns";
 
 const useStyles = makeStyles((theme) => ({
     root: {
