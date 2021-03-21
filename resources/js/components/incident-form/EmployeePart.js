@@ -45,9 +45,12 @@ class EmployeePart extends React.Component {
         });
     }
 
-    //TODO: need to solve how to solve a general listener, if there is no solution two listeners have to be here.
-    handleDatePickerChange(date) {
-        console.log(date);
+    handleDatePickerChange(field) {
+        return (date) => {
+            this.setState({
+                [field]: date,
+            });
+        }
     }
 
     render() {
@@ -94,7 +97,7 @@ class EmployeePart extends React.Component {
                                                     id="birthDate"
                                                     label="Dátum narodenia"
                                                     value={this.state.birthDate}
-                                                    onChange={this.handleDatePickerChange}
+                                                    onChange={this.handleDatePickerChange('birthDate')}
                                                     KeyboardButtonProps={{
                                                         'aria-label': 'change date',
                                                     }}
@@ -205,6 +208,7 @@ class EmployeePart extends React.Component {
                                                     margin="normal"
                                                     id="employedFrom"
                                                     label="Zamestnaný od"
+                                                    onChange={this.handleDatePickerChange('employedFrom')}
                                                     value={this.state.employedFrom}
                                                     KeyboardButtonProps={{
                                                         'aria-label': 'change date',
