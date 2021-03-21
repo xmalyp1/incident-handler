@@ -13,6 +13,7 @@ import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import ReactDOM from "react-dom";
 import Testimonials from "../components/Testimonials";
+import StoryLine from "../components/StoryLine";
 
 const useStyles = makeStyles((theme) => ({
     '@global': {
@@ -135,6 +136,8 @@ export default function Home(props) {
                     Registrovať úraz
                 </Button>
             </Box>
+            <StoryLine/>
+            <Testimonials/>
             {/* End hero unit */}
             <Container maxWidth="md" component="main">
                 <Grid container spacing={5} alignItems="flex-end">
@@ -177,7 +180,7 @@ export default function Home(props) {
                     ))}
                 </Grid>
             </Container>
-            <Testimonials/>
+
         </React.Fragment>
     );
 }
