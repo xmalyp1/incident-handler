@@ -13,6 +13,7 @@ const useStyles = theme => ({
     },
     paperForm: {
         padding: theme.spacing(3),
+        paddingBottom: theme.spacing(6),
     },
     birthInput: {
         marginTop: 0,

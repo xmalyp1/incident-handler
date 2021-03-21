@@ -1,7 +1,8 @@
 import React from "react";
 import Item from "./Item";
-import {Grid, Paper, TextField, withStyles} from "@material-ui/core";
+import {Grid, IconButton, InputAdornment, Paper, TextField, withStyles} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
+import ScheduleIcon from '@material-ui/icons/Schedule';
 import {KeyboardDatePicker,KeyboardTimePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 
@@ -13,6 +14,7 @@ const useStyles = theme => ({
     },
     paperForm: {
         padding: theme.spacing(3),
+        paddingBottom: theme.spacing(6),
     },
     birthInput: {
         marginTop: 0,
@@ -91,6 +93,7 @@ class IncidentPart extends React.Component {
                                                     placeholder="12:00"
                                                     mask="__:__ _M"
                                                     value={this.state.incidentDate}
+                                                    keyboardIcon={<ScheduleIcon />}
                                                     onChange={this.handleDatePickerChange('incidentDate')}
                                                     KeyboardButtonProps={{
                                                         'aria-label': 'change date',
@@ -109,6 +112,8 @@ class IncidentPart extends React.Component {
                                                     placeholder="08:00"
                                                     mask="__:__ _M"
                                                     value={this.state.workingFrom}
+                                                    minutesStep={15}
+                                                    keyboardIcon={<ScheduleIcon />}
                                                     onChange={this.handleDatePickerChange('workingFrom')}
                                                     KeyboardButtonProps={{
                                                         'aria-label': 'change date',
@@ -127,6 +132,8 @@ class IncidentPart extends React.Component {
                                                     placeholder="15:00"
                                                     mask="__:__ _M"
                                                     value={this.state.workingTo}
+                                                    minutesStep={15}
+                                                    keyboardIcon={<ScheduleIcon />}
                                                     onChange={this.handleDatePickerChange('workingTo')}
                                                     KeyboardButtonProps={{
                                                         'aria-label': 'change date',
@@ -170,7 +177,7 @@ class IncidentPart extends React.Component {
                                 fullWidth
                             />
                         </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} sm={12}>
                             <TextField
                                 required
                                 id="jobDescription"
@@ -178,12 +185,13 @@ class IncidentPart extends React.Component {
                                 label="Druh vykonávanej práce"
                                 onChange={this.handleInputChange}
                                 value={this.state.jobDescription}
-                                rows={10}
+                                rows={3}
+                                variant={'outlined'}
                                 fullWidth
                                 multiline
                             />
                         </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} sm={12}>
                             <TextField
                                 required
                                 id="incidentDescription"
@@ -192,6 +200,7 @@ class IncidentPart extends React.Component {
                                 onChange={this.handleInputChange}
                                 value={this.state.incidentDescription}
                                 rows={10}
+                                variant={'outlined'}
                                 fullWidth
                                 multiline
                             />
