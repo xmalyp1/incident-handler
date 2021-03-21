@@ -1,4 +1,7 @@
 import React from 'react';
+import Typography from "@material-ui/core/Typography";
+import {Paper} from "@material-ui/core";
+import {label} from "./EmployeePart";
 
 export default class BasePart extends React.Component {
     constructor(props) {
@@ -28,5 +31,22 @@ export default class BasePart extends React.Component {
                 [field]: date,
             });
         }
+    }
+
+    render() {
+        const {classes} = this.props;
+        return (
+            <React.Fragment>
+                <Typography variant="h6" gutterBottom>
+                    {label}
+                </Typography>
+                <Paper className={classes.paperForm}>
+                    {this.renderContent(classes)}
+                </Paper>
+            </React.Fragment>
+        );
+    }
+
+    renderContent(classes) {
     }
 }
