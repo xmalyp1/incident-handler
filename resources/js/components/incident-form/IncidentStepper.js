@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 const STORAGE_KEY = 'INC_DATA';
 const INIT_STATE = {
     "personalData":{
-        "fistName":"",
+        "firstName":"",
         "secondName":"",
         "birthDate":new Date(),
         "personalId":"",
@@ -48,7 +48,6 @@ function getSteps() {
 
 const storeDataToLocalStorage = (data) => {
     if (typeof(Storage) !== "undefined") {
-        console.log(data)
         localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
     } else {
         alert("Local Storage is not supported in this web browser. Therefore we are not persisting your data in the browser.")
@@ -58,10 +57,11 @@ const storeDataToLocalStorage = (data) => {
 const getInitData = () => {
     if (typeof(Storage) !== "undefined") {
         let storedData = localStorage.getItem(STORAGE_KEY);
-        if(storedData !== null)
-            return storedData;
+        if(storedData !== null){
+            console.debug("Retrieving state from local storage");
+            return JSON.parse(storedData);
+        }
     }
-
     return INIT_STATE;
 }
 
@@ -69,12 +69,13 @@ export default function IncidentStepper(props) {
     const classes = useStyles();
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set());
-    const [data,setData] = useState(INIT_STATE);
+    const [data,setData] = useState(getInitData());
     const steps = getSteps();
 
     const saveObjectPropertyToState = (subStep,instance) => {
         let state = Object.assign({},data);
         state[subStep] = instance;
+        storeDataToLocalStorage(state);
         setData(state);
     }
 
@@ -84,11 +85,9 @@ export default function IncidentStepper(props) {
         console.debug("Seaching "+ key + " in "+ parentKeys + " and found: "+updatedKey);
 
         if(typeof updatedKey !== 'undefined' ){
-            //TODO: save state !!!!!
             saveObjectPropertyToState(updatedKey,childState)
-            storeDataToLocalStorage(data);
         }else{
-            console.error("State have not been updated, because the key for update is undefined.")
+            console.error("INCIDENT HANDLER ERROR : State have not been updated, because the key for update is undefined.")
         }
     }
 
@@ -101,6 +100,7 @@ export default function IncidentStepper(props) {
             case 0:
                 return <EmployeePart maritalStatus={JSON.parse(props.maritalStatus)}
                                      insuranceCompany={JSON.parse(props.insuranceCompany)}
+                                     initState={data['personalData']}
                                      onComponentChange={handleStateChange}/>;
             case 1:
                 return <IncidentPart/>;

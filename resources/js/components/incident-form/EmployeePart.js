@@ -26,21 +26,7 @@ const useStyles = theme => ({
 class EmployeePart extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            firstName:"",
-            lastName:"",
-            birthDate:new Date(),
-            personalId:"",
-            address1:"",
-            address2:"",
-            city:"",
-            zip:"",
-            maritalStatus:"",
-            numOfChildren:0,
-            employedFrom:new Date(),
-            insuranceCompany:""
-        };
-
+        this.state = props.initState;
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleDatePickerChange = this.handleDatePickerChange.bind(this);
     }
