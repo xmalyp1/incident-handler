@@ -28,6 +28,8 @@ class IncidentPart extends React.Component {
     constructor(props) {
         super(props);
         this.state = props.initState;
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleDatePickerChange = this.handleDatePickerChange.bind(this);
     }
 
     componentWillUnmount(){
