@@ -7,6 +7,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import EmployeePart, {label as employeePartLabel} from './EmployeePart';
 import IncidentPart, {label as incidentPartLabel} from './IncidentPart';
+import ForwardIcon from '@material-ui/icons/Forward';
+import DescriptionIcon from '@material-ui/icons/Description';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import {AdditionalQuestionsPart, label as additionalQuestionsPartLabel} from "./AdditionalQuestionsPart";
 
 const useStyles = makeStyles((theme) => ({
@@ -16,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     },
     button: {
         marginRight: theme.spacing(1),
+    },
+    resetButton:{
+      float:"right",
     },
     instructions: {
         marginTop: theme.spacing(1),
@@ -161,6 +167,10 @@ export default function IncidentStepper(props) {
     };
 
     const handleReset = () => {
+        if (typeof(Storage) !== "undefined") {
+            localStorage.removeItem(STORAGE_KEY);
+        }
+        setData(getInitData());
         setActiveStep(0);
     };
 
@@ -190,18 +200,19 @@ export default function IncidentStepper(props) {
                         <Typography className={classes.instructions}>
                             All steps completed - you&apos;re finished
                         </Typography>
-                        <Button onClick={handleReset} className={classes.button}>
-                            Reset
-                        </Button>
                     </div>
                 ) : (
                     <div>
+
                         <div className={classes.instructions}>
+                            <Button onClick={handleReset} className={classes.resetButton} endIcon={<HighlightOffIcon/>}>
+                                Zrušiť
+                            </Button>
                             {stepContent(activeStep, props)}
                         </div>
                         <div>
                             <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                                Back
+                                Späť
                             </Button>
                             {isStepOptional(activeStep) && (
                                 <Button
@@ -209,7 +220,7 @@ export default function IncidentStepper(props) {
                                     color="primary"
                                     onClick={handleSkip}
                                     className={classes.button}>
-                                    Skip
+                                    Vynechať krok
                                 </Button>
                             )}
 
@@ -217,8 +228,10 @@ export default function IncidentStepper(props) {
                                 variant="contained"
                                 color="primary"
                                 onClick={handleNext}
-                                className={classes.button}>
-                                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                                className={classes.button}
+                                endIcon={activeStep === steps.length - 1 ? <DescriptionIcon/> : <ForwardIcon/>}
+                                >
+                                {activeStep === steps.length - 1 ? 'Generovať dokumenty' : 'Ďalej'}
                             </Button>
                         </div>
                     </div>
