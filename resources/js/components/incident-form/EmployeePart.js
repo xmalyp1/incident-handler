@@ -32,8 +32,8 @@ class EmployeePart extends React.Component {
         this.handleDatePickerChange = this.handleDatePickerChange.bind(this);
     }
 
-    componentWillUnmount(){
-        this.props.onComponentChange('personalData',Object.assign({},this.state));
+    componentWillUnmount() {
+        this.props.onComponentChange('personalData', Object.assign({}, this.state));
     }
 
     handleInputChange(event) {
@@ -55,7 +55,7 @@ class EmployeePart extends React.Component {
     }
 
     render() {
-        const { classes } = this.props;
+        const {classes} = this.props;
         return (
             <React.Fragment>
                 <Typography variant="h6" gutterBottom>

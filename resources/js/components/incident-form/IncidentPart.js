@@ -1,9 +1,8 @@
 import React from "react";
-import Item from "./Item";
-import {Grid, IconButton, InputAdornment, Paper, TextField, withStyles} from "@material-ui/core";
+import {Grid, Paper, TextField, withStyles} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import ScheduleIcon from '@material-ui/icons/Schedule';
-import {KeyboardDatePicker,KeyboardTimePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
+import {KeyboardDatePicker, KeyboardTimePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 
 export const label = 'Údaje o pracovnom úraze';
@@ -34,8 +33,8 @@ class IncidentPart extends React.Component {
         this.handleDatePickerChange = this.handleDatePickerChange.bind(this);
     }
 
-    componentWillUnmount(){
-        this.props.onComponentChange('incidentData',Object.assign({},this.state));
+    componentWillUnmount() {
+        this.props.onComponentChange('incidentData', Object.assign({}, this.state));
     }
 
     handleInputChange(event) {
@@ -57,7 +56,7 @@ class IncidentPart extends React.Component {
     }
 
     render() {
-        const { classes } = this.props;
+        const {classes} = this.props;
         return (
             <React.Fragment>
                 <Typography variant="h6" gutterBottom>
@@ -93,7 +92,7 @@ class IncidentPart extends React.Component {
                                                     placeholder="12:00"
                                                     mask="__:__ _M"
                                                     value={this.state.incidentDate}
-                                                    keyboardIcon={<ScheduleIcon />}
+                                                    keyboardIcon={<ScheduleIcon/>}
                                                     onChange={this.handleDatePickerChange('incidentDate')}
                                                     KeyboardButtonProps={{
                                                         'aria-label': 'change date',
@@ -113,7 +112,7 @@ class IncidentPart extends React.Component {
                                                     mask="__:__ _M"
                                                     value={this.state.workingFrom}
                                                     minutesStep={15}
-                                                    keyboardIcon={<ScheduleIcon />}
+                                                    keyboardIcon={<ScheduleIcon/>}
                                                     onChange={this.handleDatePickerChange('workingFrom')}
                                                     KeyboardButtonProps={{
                                                         'aria-label': 'change date',
@@ -133,7 +132,7 @@ class IncidentPart extends React.Component {
                                                     mask="__:__ _M"
                                                     value={this.state.workingTo}
                                                     minutesStep={15}
-                                                    keyboardIcon={<ScheduleIcon />}
+                                                    keyboardIcon={<ScheduleIcon/>}
                                                     onChange={this.handleDatePickerChange('workingTo')}
                                                     KeyboardButtonProps={{
                                                         'aria-label': 'change date',
@@ -247,7 +246,5 @@ class IncidentPart extends React.Component {
         )
     }
 }
+
 export default withStyles(useStyles)(IncidentPart);
-
-
-

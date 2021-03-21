@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
     button: {
         marginRight: theme.spacing(1),
     },
-    resetButton:{
-      float:"right",
+    resetButton: {
+        float: "right",
     },
     instructions: {
         marginTop: theme.spacing(1),
@@ -32,31 +32,31 @@ const useStyles = makeStyles((theme) => ({
 const INIT_DATE = new Date();
 const STORAGE_KEY = 'INC_DATA';
 const INIT_STATE = {
-    "personalData":{
-        "firstName":"",
-        "lastName":"",
-        "birthDate":INIT_DATE,
-        "personalId":"",
-        "address1":"",
-        "address2":"",
-        "city":"",
-        "zip":"",
-        "maritalStatus":"",
-        "numOfChildren":0,
-        "employedFrom":INIT_DATE,
-        "insuranceCompany":""
+    "personalData": {
+        "firstName": "",
+        "lastName": "",
+        "birthDate": INIT_DATE,
+        "personalId": "",
+        "address1": "",
+        "address2": "",
+        "city": "",
+        "zip": "",
+        "maritalStatus": "",
+        "numOfChildren": 0,
+        "employedFrom": INIT_DATE,
+        "insuranceCompany": ""
     },
-    "incidentData":{
-        "incidentDate":INIT_DATE,
-        "workingFrom":INIT_DATE,
-        "workingTo":INIT_DATE,
-        "workedHours":0,
-        "incidentLocation":"",
-        "affectedBodyPart":"",
-        "jobDescription":"",
-        "incidentDescription":"",
-        "witness":"",
-        "creator":""
+    "incidentData": {
+        "incidentDate": INIT_DATE,
+        "workingFrom": INIT_DATE,
+        "workingTo": INIT_DATE,
+        "workedHours": 0,
+        "incidentLocation": "",
+        "affectedBodyPart": "",
+        "jobDescription": "",
+        "incidentDescription": "",
+        "witness": "",
+        "creator": ""
     }
 };
 
@@ -66,17 +66,17 @@ function getSteps() {
 
 
 const storeDataToLocalStorage = (data) => {
-    if (typeof(Storage) !== "undefined") {
-        localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
+    if (typeof (Storage) !== "undefined") {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     } else {
         alert("Local Storage is not supported in this web browser. Therefore we are not persisting your data in the browser.")
     }
 }
 
 const getInitData = () => {
-    if (typeof(Storage) !== "undefined") {
+    if (typeof (Storage) !== "undefined") {
         let storedData = localStorage.getItem(STORAGE_KEY);
-        if(storedData !== null){
+        if (storedData !== null) {
             console.debug("Retrieving state from local storage");
             return JSON.parse(storedData);
         }
@@ -88,25 +88,25 @@ export default function IncidentStepper(props) {
     const classes = useStyles();
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set());
-    const [data,setData] = useState(getInitData());
+    const [data, setData] = useState(getInitData());
     const steps = getSteps();
 
-    const saveObjectPropertyToState = (subStep,instance) => {
-        let state = Object.assign({},data);
+    const saveObjectPropertyToState = (subStep, instance) => {
+        const state = Object.assign({}, data);
         state[subStep] = instance;
         storeDataToLocalStorage(state);
         setData(state);
     }
 
-    const handleStateChange = (key,childState) => {
-        let parentKeys = Object.keys(data)
-        let updatedKey = parentKeys.find(value => value === key);
-        console.debug("Seaching "+ key + " in "+ parentKeys + " and found: "+updatedKey);
+    const handleStateChange = (key, childState) => {
+        const parentKeys = Object.keys(data)
+        const updatedKey = parentKeys.find(value => value === key);
+        console.debug("Searching " + key + " in " + parentKeys + " and found: " + updatedKey);
 
-        if(typeof updatedKey !== 'undefined' ){
-            saveObjectPropertyToState(updatedKey,childState)
-        }else{
-            console.error("INCIDENT HANDLER ERROR : State have not been updated, because the key for update is undefined.")
+        if (typeof updatedKey !== 'undefined') {
+            saveObjectPropertyToState(updatedKey, childState)
+        } else {
+            console.error("INCIDENT HANDLER ERROR : State has not been updated, because the key for update is undefined.")
         }
     }
 
@@ -167,7 +167,7 @@ export default function IncidentStepper(props) {
     };
 
     const handleReset = () => {
-        if (typeof(Storage) !== "undefined") {
+        if (typeof Storage !== "undefined") {
             localStorage.removeItem(STORAGE_KEY);
         }
         setData(getInitData());
@@ -230,7 +230,7 @@ export default function IncidentStepper(props) {
                                 onClick={handleNext}
                                 className={classes.button}
                                 endIcon={activeStep === steps.length - 1 ? <DescriptionIcon/> : <ForwardIcon/>}
-                                >
+                            >
                                 {activeStep === steps.length - 1 ? 'Generovať dokumenty' : 'Ďalej'}
                             </Button>
                         </div>
