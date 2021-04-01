@@ -149,6 +149,6 @@ export default class BasePart extends React.Component {
         </Grid>;
     }
 
-    renderContent(classes) {
+    renderContent() {
     }
 }

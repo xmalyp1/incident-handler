@@ -23,7 +23,7 @@ const useStyles = theme => ({
 
 class IncidentPart extends BasePart {
 
-    renderContent(classes) {
+    renderContent() {
         return (
             <Grid container spacing={5}>
                 {this.renderItem({
