@@ -5,12 +5,12 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import EmployeePart, {label as employeePartLabel} from './EmployeePart';
-import IncidentPart, {label as incidentPartLabel} from './IncidentPart';
 import ForwardIcon from '@material-ui/icons/Forward';
 import DescriptionIcon from '@material-ui/icons/Description';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import {AdditionalQuestionsPart, label as additionalQuestionsPartLabel} from "./AdditionalQuestionsPart";
+import BasePart from "./BasePart";
+import parts from './parts';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -61,7 +61,7 @@ const INIT_STATE = {
 };
 
 function getSteps() {
-    return [employeePartLabel, incidentPartLabel, additionalQuestionsPartLabel];
+    return [parts.employeePart.label, parts.incidentPart.label, additionalQuestionsPartLabel];
 }
 
 
@@ -117,15 +117,17 @@ export default function IncidentStepper(props) {
     const stepContent = (step, props) => {
         switch (step) {
             case 0:
-                return <EmployeePart maritalStatus={JSON.parse(props.maritalStatus)}
-                                     insuranceCompany={JSON.parse(props.insuranceCompany)}
-                                     initState={data['personalData']}
-                                     dataKey="personalData"
-                                     onComponentChange={handleStateChange}/>;
+                return <BasePart maritalStatus={JSON.parse(props.maritalStatus)}
+                                 insuranceCompany={JSON.parse(props.insuranceCompany)}
+                                 initState={data['personalData']}
+                                 dataKey="personalData"
+                                 part={parts.employeePart}
+                                 onComponentChange={handleStateChange}/>;
             case 1:
-                return <IncidentPart initState={data['incidentData']}
-                                     dataKey="incidentData"
-                                     onComponentChange={handleStateChange}/>;
+                return <BasePart initState={data['incidentData']}
+                                 dataKey="incidentData"
+                                 part={parts.incidentPart}
+                                 onComponentChange={handleStateChange}/>;
             case 2:
                 return <AdditionalQuestionsPart/>;
             default:
