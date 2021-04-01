@@ -68,6 +68,12 @@ export default withStyles(theme => ({
         </Grid>;
     }
 
+    _renderField({marginDivider = false, sm = 6, ...props}) {
+        return <Grid item xs={12} sm={sm} className={marginDivider ? this.props.classes.marginDivider : undefined}>
+            {this._chooseItem(props)}
+        </Grid>;
+    }
+
     _chooseItem({type, ...props}) {
         switch (type) {
             case 'date':
@@ -79,12 +85,6 @@ export default withStyles(theme => ({
             default:
                 return this._renderTextField({type, ...props});
         }
-    }
-
-    _renderField({marginDivider = false, sm = 6, ...props}) {
-        return <Grid item xs={12} sm={sm} className={marginDivider ? this.props.classes.marginDivider : undefined}>
-            {this._chooseItem(props)}
-        </Grid>;
     }
 
     _renderDatePicker({name, label, birthInput}) {
