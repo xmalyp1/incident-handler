@@ -68,9 +68,13 @@ export default withStyles(theme => ({
         </Grid>;
     }
 
-    _renderField({marginDivider = false, sm = 6, ...props}) {
-        return <Grid item xs={12} sm={sm} className={marginDivider ? this.props.classes.marginDivider : undefined}>
-            {this._chooseItem(props)}
+    _renderField({marginDivider = false, sm = 6, name, ...props}) {
+        return <Grid item
+                     xs={12}
+                     sm={sm}
+                     className={marginDivider ? this.props.classes.marginDivider : undefined}
+                     key={name}>
+            {this._chooseItem({name, ...props})}
         </Grid>;
     }
 
@@ -88,7 +92,7 @@ export default withStyles(theme => ({
     }
 
     _renderDatePicker({name, label, birthInput}) {
-        return <MuiPickersUtilsProvider utils={DateFnsUtils} key={name}>
+        return <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker fullWidth
                                 className={birthInput ? this.props.classes.birthInput : undefined}
                                 disableToolbar
@@ -107,7 +111,7 @@ export default withStyles(theme => ({
     }
 
     _renderTimePicker({name, label, value, placeholder, minutesStep}) {
-        return <MuiPickersUtilsProvider utils={DateFnsUtils} key={name}>
+        return <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardTimePicker fullWidth
                                 disableToolbar
                                 variant="inline"
@@ -164,7 +168,6 @@ export default withStyles(theme => ({
             rows={rows}
             variant={rows ? 'outlined' : 'standard'}
             autoComplete={autoComplete}
-            key={name}
         />;
     }
 });
