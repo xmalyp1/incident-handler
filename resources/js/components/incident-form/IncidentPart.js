@@ -1,28 +1,10 @@
 import React from "react";
 import {Grid, withStyles} from "@material-ui/core";
-import BasePart from "./BasePart";
+import BasePart, {useStyles} from "./BasePart";
 
 export const label = 'Údaje o pracovnom úraze';
 
-const useStyles = theme => ({
-    root: {
-        flexGrow: 1,
-    },
-    paperForm: {
-        padding: theme.spacing(3),
-        paddingBottom: theme.spacing(6),
-    },
-    birthInput: {
-        marginTop: 0,
-    },
-    marginDivider: {
-        marginTop: 10
-    }
-});
-
-
-class IncidentPart extends BasePart {
-
+export default withStyles(useStyles)(class extends BasePart {
     renderContent() {
         return (
             <Grid container spacing={5}>
@@ -101,6 +83,4 @@ class IncidentPart extends BasePart {
             </Grid>
         );
     }
-}
-
-export default withStyles(useStyles)(IncidentPart);
+});

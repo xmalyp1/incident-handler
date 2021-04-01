@@ -6,7 +6,23 @@ import {KeyboardDatePicker, KeyboardTimePicker, MuiPickersUtilsProvider} from "@
 import DateFnsUtils from "@date-io/date-fns";
 import ScheduleIcon from "@material-ui/icons/Schedule";
 
-export default class BasePart extends React.Component {
+export const useStyles = theme => ({
+    root: {
+        flexGrow: 1,
+    },
+    paperForm: {
+        padding: theme.spacing(3),
+        paddingBottom: theme.spacing(6),
+    },
+    birthInput: {
+        marginTop: 0,
+    },
+    marginDivider: {
+        marginTop: 10
+    }
+});
+
+export default class extends React.Component {
     constructor(props) {
         super(props);
         this.state = props.initState;
