@@ -51,8 +51,6 @@ const INIT_STATE = parts.reduce((data, part) => ({
     }), {})
 }), {});
 
-const getSteps = () => parts.map(e => e.label);
-
 const storeDataToLocalStorage = (data) => {
     try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
@@ -78,7 +76,6 @@ export default function IncidentStepper(props) {
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set());
     const [data, setData] = useState(getInitData());
-    const steps = getSteps();
 
     const addDropdownItems = (field) => parts[0].fields.find(e => e.name === field).items = JSON.parse(props[field]);
     addDropdownItems('maritalStatus');
@@ -103,23 +100,19 @@ export default function IncidentStepper(props) {
         }
     }
 
-    const isStepOptional = (step) => {
-        return !!parts[step]?.optional;
-    };
+    const isStepOptional = (step) => !!parts[step]?.optional;
 
     const stepContent = (step) => {
         try {
             const part = parts[step];
             const name = part.name;
             return <BasePart initState={data[name]} dataKey={name} part={part} onComponentChange={handleStateChange}/>
-        } catch (_) {
+        } catch {
             return 'Unknown step';
         }
     }
 
-    const isStepSkipped = (step) => {
-        return skipped.has(step);
-    };
+    const isStepSkipped = (step) => skipped.has(step);
 
     const handleNext = () => {
         let newSkipped = skipped;
@@ -163,7 +156,7 @@ export default function IncidentStepper(props) {
     return (
         <div className={classes.root}>
             <Stepper activeStep={activeStep}>
-                {steps.map((label, index) => {
+                {parts.map(({label}, index) => {
                     const stepProps = {};
                     const labelProps = {};
                     if (isStepOptional(index)) {
@@ -181,7 +174,7 @@ export default function IncidentStepper(props) {
             </Stepper>
 
             <div>
-                {activeStep === steps.length ? (
+                {activeStep === parts.length ? (
                     <div>
                         <Typography className={classes.instructions}>
                             All steps completed - you&apos;re finished
@@ -215,9 +208,9 @@ export default function IncidentStepper(props) {
                                 color="primary"
                                 onClick={handleNext}
                                 className={classes.button}
-                                endIcon={activeStep === steps.length - 1 ? <DescriptionIcon/> : <ForwardIcon/>}
+                                endIcon={activeStep === parts.length - 1 ? <DescriptionIcon/> : <ForwardIcon/>}
                             >
-                                {activeStep === steps.length - 1 ? 'Generovať dokumenty' : 'Ďalej'}
+                                {activeStep === parts.length - 1 ? 'Generovať dokumenty' : 'Ďalej'}
                             </Button>
                         </div>
                     </div>
