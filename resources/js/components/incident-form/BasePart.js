@@ -152,7 +152,7 @@ export default withStyles(theme => ({
         </FormControl>;
     }
 
-    _renderTextField({name, label, autoComplete, required, type, inputProps, rows}) {
+    _renderTextField({name, label, autoComplete, required, type, inputProps, rows, error}) {
         return <TextField
             required={required}
             value={this.state[name]}
@@ -168,6 +168,7 @@ export default withStyles(theme => ({
             rows={rows}
             variant={rows ? 'outlined' : 'standard'}
             autoComplete={autoComplete}
+            error={!!error && error(this.state[name], this.state)}
         />;
     }
 });

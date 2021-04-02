@@ -7,12 +7,14 @@ export default {
                 label: 'Krstné Meno',
                 autoComplete: 'given-name',
                 required: true,
+                error: (value) => !value,
             },
             {
                 name: 'lastName',
                 label: 'Priezvisko',
                 autoComplete: 'family-name',
                 required: true,
+                error: (value) => !value,
             },
             {
                 name: 'birthDate',
@@ -24,6 +26,7 @@ export default {
                 name: 'personalId',
                 label: 'Rodné číslo',
                 required: true,
+                error: (value) => value.length !== 10 || parseInt(value) % 11 !== 0,
             },
             {
                 name: 'address1',
@@ -32,24 +35,28 @@ export default {
                 required: true,
                 marginDivider: true,
                 sm: 12,
+                error: (value) => !value,
             },
             {
                 name: 'address2',
                 label: 'Adresa riadok č. 2',
                 autoComplete: 'shipping address-line2',
                 sm: 12,
+                error: (value, state) => !!value && state.address1 === value
             },
             {
                 name: 'city',
                 label: 'Mesto',
                 autoComplete: 'shipping address-level2',
                 required: true,
+                error: (value) => !value,
             },
             {
                 name: 'zip',
                 label: 'PSČ',
                 autoComplete: 'shipping postal-code',
                 required: true,
+                error: (value) => value.length !== 5,
             },
             {
                 name: 'maritalStatus',
@@ -65,6 +72,7 @@ export default {
                 type: 'number',
                 inputProps: {min: 0, max: 20},
                 marginDivider: true,
+                error: (value) => !value || value < 0 || value > 20,
             },
             {
                 name: 'employedFrom',
