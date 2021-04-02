@@ -51,26 +51,24 @@ const INIT_STATE = parts.reduce((data, part) => ({
     }), {})
 }), {});
 
-function getSteps() {
-    return parts.map(e => e.label);
-}
-
+const getSteps = () => parts.map(e => e.label);
 
 const storeDataToLocalStorage = (data) => {
-    if (typeof (Storage) !== "undefined") {
+    try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    } else {
+    } catch {
         alert("Local Storage is not supported in this web browser. Therefore we are not persisting your data in the browser.")
     }
 }
 
 const getInitData = () => {
-    if (typeof (Storage) !== "undefined") {
-        let storedData = localStorage.getItem(STORAGE_KEY);
-        if (storedData !== null) {
+    try {
+        const storedData = localStorage.getItem(STORAGE_KEY);
+        if (storedData != null) {
             console.debug("Retrieving state from local storage");
             return JSON.parse(storedData);
         }
+    } catch {
     }
     return INIT_STATE;
 }
@@ -96,9 +94,9 @@ export default function IncidentStepper(props) {
     const handleStateChange = (key, childState) => {
         const parentKeys = Object.keys(data)
         const updatedKey = parentKeys.find(value => value === key);
-        console.debug("Searching " + key + " in " + parentKeys + " and found: " + updatedKey);
+        console.debug(`Searching ${key} in ${parentKeys} and found: ${updatedKey}`);
 
-        if (typeof updatedKey !== 'undefined') {
+        if (updatedKey != null) {
             saveObjectPropertyToState(updatedKey, childState)
         } else {
             console.error("INCIDENT HANDLER ERROR : State has not been updated, because the key for update is undefined.")
@@ -154,8 +152,9 @@ export default function IncidentStepper(props) {
     };
 
     const handleReset = () => {
-        if (typeof Storage !== "undefined") {
+        try {
             localStorage.removeItem(STORAGE_KEY);
+        } catch {
         }
         setData(getInitData());
         setActiveStep(0);
