@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import ForwardIcon from '@material-ui/icons/Forward';
 import DescriptionIcon from '@material-ui/icons/Description';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import {AdditionalQuestionsPart, label as additionalQuestionsPartLabel} from "./AdditionalQuestionsPart";
 import BasePart from "./BasePart";
 import parts from './parts';
 
@@ -31,37 +30,29 @@ const useStyles = makeStyles((theme) => ({
 
 const INIT_DATE = new Date();
 const STORAGE_KEY = 'INC_DATA';
-const INIT_STATE = {
-    "personalData": {
-        "firstName": "",
-        "lastName": "",
-        "birthDate": INIT_DATE,
-        "personalId": "",
-        "address1": "",
-        "address2": "",
-        "city": "",
-        "zip": "",
-        "maritalStatus": "",
-        "numOfChildren": 0,
-        "employedFrom": INIT_DATE,
-        "insuranceCompany": ""
-    },
-    "incidentData": {
-        "incidentDate": INIT_DATE,
-        "workingFrom": INIT_DATE,
-        "workingTo": INIT_DATE,
-        "workedHours": 0,
-        "incidentLocation": "",
-        "affectedBodyPart": "",
-        "jobDescription": "",
-        "incidentDescription": "",
-        "witness": "",
-        "creator": ""
+
+const getDefaultValue = (type) => {
+    switch (type) {
+        case 'date':
+        case 'time':
+            return INIT_DATE;
+        case 'number':
+            return 0
+        default:
+            return '';
     }
-};
+}
+
+const INIT_STATE = parts.reduce((data, part) => ({
+    ...data,
+    [part.name]: part.fields.reduce((state, field) => ({
+        ...state,
+        [field.value ?? field.name]: getDefaultValue(field.type)
+    }), {})
+}), {});
 
 function getSteps() {
-    return [parts[0].label, parts[1].label, additionalQuestionsPartLabel];
+    return parts.map(e => e.label);
 }
 
 
@@ -119,24 +110,14 @@ export default function IncidentStepper(props) {
     };
 
     const stepContent = (step) => {
-        switch (step) {
-            case 0:
-                return <BasePart initState={data['personalData']}
-                                 dataKey="personalData"
-                                 part={parts[0]}
-                                 onComponentChange={handleStateChange}/>;
-            case 1:
-                return <BasePart initState={data['incidentData']}
-                                 dataKey="incidentData"
-                                 part={parts[1]}
-                                 onComponentChange={handleStateChange}/>;
-            case 2:
-                return <AdditionalQuestionsPart/>;
-            default:
-                return 'Unknown step';
+        try {
+            const part = parts[step];
+            const name = part.name;
+            return <BasePart initState={data[name]} dataKey={name} part={part} onComponentChange={handleStateChange}/>
+        } catch (_) {
+            return 'Unknown step';
         }
     }
-
 
     const isStepSkipped = (step) => {
         return skipped.has(step);
