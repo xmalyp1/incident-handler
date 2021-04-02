@@ -1,5 +1,6 @@
-export default {
-    employeePart: {
+export default [
+    {
+        name: 'employeePart',
         label: 'Údaje o zamestancovi',
         fields: [
             {
@@ -90,8 +91,10 @@ export default {
             },
         ],
     },
-    incidentPart: {
+    {
+        name: 'incidentPart',
         label: 'Údaje o pracovnom úraze',
+        optional: false,
         fields: [
             {
                 name: 'incidentDate',
@@ -167,4 +170,4 @@ export default {
             }
         ],
     },
-}
+]

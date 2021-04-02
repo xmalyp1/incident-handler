@@ -61,7 +61,7 @@ const INIT_STATE = {
 };
 
 function getSteps() {
-    return [parts.employeePart.label, parts.incidentPart.label, additionalQuestionsPartLabel];
+    return [parts[0].label, parts[1].label, additionalQuestionsPartLabel];
 }
 
 
@@ -111,7 +111,7 @@ export default function IncidentStepper(props) {
     }
 
     const isStepOptional = (step) => {
-        return step === 2;
+        return !!parts[step]?.optional;
     };
 
     const stepContent = (step, props) => {
@@ -121,12 +121,12 @@ export default function IncidentStepper(props) {
                                  insuranceCompany={JSON.parse(props.insuranceCompany)}
                                  initState={data['personalData']}
                                  dataKey="personalData"
-                                 part={parts.employeePart}
+                                 part={parts[0]}
                                  onComponentChange={handleStateChange}/>;
             case 1:
                 return <BasePart initState={data['incidentData']}
                                  dataKey="incidentData"
-                                 part={parts.incidentPart}
+                                 part={parts[1]}
                                  onComponentChange={handleStateChange}/>;
             case 2:
                 return <AdditionalQuestionsPart/>;
