@@ -131,7 +131,7 @@ export default withStyles(theme => ({
         </MuiPickersUtilsProvider>;
     }
 
-    _renderDropdown({name, label, itemSelector}) {
+    _renderDropdown({name, label, itemSelector, items}) {
         const labelId = _.kebabCase(name + 'Label');
         return <FormControl fullWidth>
             <InputLabel id={labelId}>{label}</InputLabel>
@@ -145,9 +145,9 @@ export default withStyles(theme => ({
                 <MenuItem value="">
                     <em>Neznámy</em>
                 </MenuItem>
-                {this.props[name].map(item => (
+                {items?.map(item =>
                     <MenuItem key={item[itemSelector]} value={item[itemSelector]}>{item[itemSelector]}</MenuItem>
-                ))}
+                )}
             </Select>
         </FormControl>;
     }

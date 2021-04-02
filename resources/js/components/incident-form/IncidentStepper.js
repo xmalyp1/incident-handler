@@ -91,6 +91,10 @@ export default function IncidentStepper(props) {
     const [data, setData] = useState(getInitData());
     const steps = getSteps();
 
+    const addDropdownItems = (field) => parts[0].fields.find(e => e.name === field).items = JSON.parse(props[field]);
+    addDropdownItems('maritalStatus');
+    addDropdownItems('insuranceCompany');
+
     const saveObjectPropertyToState = (subStep, instance) => {
         const state = Object.assign({}, data);
         state[subStep] = instance;
@@ -114,12 +118,10 @@ export default function IncidentStepper(props) {
         return !!parts[step]?.optional;
     };
 
-    const stepContent = (step, props) => {
+    const stepContent = (step) => {
         switch (step) {
             case 0:
-                return <BasePart maritalStatus={JSON.parse(props.maritalStatus)}
-                                 insuranceCompany={JSON.parse(props.insuranceCompany)}
-                                 initState={data['personalData']}
+                return <BasePart initState={data['personalData']}
                                  dataKey="personalData"
                                  part={parts[0]}
                                  onComponentChange={handleStateChange}/>;
@@ -212,7 +214,7 @@ export default function IncidentStepper(props) {
                             <Button onClick={handleReset} className={classes.resetButton} endIcon={<HighlightOffIcon/>}>
                                 Zrušiť
                             </Button>
-                            {stepContent(activeStep, props)}
+                            {stepContent(activeStep)}
                         </div>
                         <div>
                             <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
