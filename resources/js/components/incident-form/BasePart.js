@@ -24,13 +24,13 @@ export default withStyles(theme => ({
 (class extends React.Component {
     constructor(props) {
         super(props);
-        this.state = props.initState;
+        this.state = props.data[props.part.name];
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleDatePickerChange = this.handleDatePickerChange.bind(this);
     }
 
     componentWillUnmount() {
-        this.props.onComponentChange(this.props.dataKey, Object.assign({}, this.state));
+        this.props.onComponentChange(this.props.part.name, {...this.state});
     }
 
     handleInputChange(event) {

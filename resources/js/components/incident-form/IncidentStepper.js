@@ -82,7 +82,7 @@ export default function IncidentStepper(props) {
     addDropdownItems('insuranceCompany');
 
     const saveObjectPropertyToState = (subStep, instance) => {
-        const state = Object.assign({}, data);
+        const state = {...data};
         state[subStep] = instance;
         storeDataToLocalStorage(state);
         setData(state);
@@ -101,17 +101,6 @@ export default function IncidentStepper(props) {
     }
 
     const isStepOptional = (step) => !!parts[step]?.optional;
-
-    const stepContent = (step) => {
-        try {
-            const part = parts[step];
-            const name = part.name;
-            return <BasePart initState={data[name]} dataKey={name} part={part} onComponentChange={handleStateChange}/>
-        } catch {
-            return 'Unknown step';
-        }
-    }
-
     const isStepSkipped = (step) => skipped.has(step);
 
     const handleNext = () => {
@@ -182,12 +171,11 @@ export default function IncidentStepper(props) {
                     </div>
                 ) : (
                     <div>
-
                         <div className={classes.instructions}>
                             <Button onClick={handleReset} className={classes.resetButton} endIcon={<HighlightOffIcon/>}>
                                 Zrušiť
                             </Button>
-                            {stepContent(activeStep)}
+                            <BasePart data={data} part={parts[activeStep]} onComponentChange={handleStateChange}/>
                         </div>
                         <div>
                             <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
