@@ -10,6 +10,7 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import BasePart from "./BasePart";
 import parts from './parts';
+import * as localStorageUtils from '../../common/localStorageUtils';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const INIT_DATE = new Date();
-const STORAGE_KEY = 'INC_DATA';
 
 const getDefaultValue = (type) => {
     switch (type) {
@@ -51,25 +51,7 @@ const INIT_STATE = parts.reduce((data, part) => ({
     }), {})
 }), {});
 
-const storeDataToLocalStorage = (data) => {
-    try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    } catch {
-        alert("Local Storage is not supported in this web browser. Therefore we are not persisting your data in the browser.")
-    }
-}
-
-const getInitData = () => {
-    try {
-        const storedData = localStorage.getItem(STORAGE_KEY);
-        if (storedData != null) {
-            console.debug("Retrieving state from local storage");
-            return JSON.parse(storedData);
-        }
-    } catch {
-    }
-    return INIT_STATE;
-}
+const getInitData = () => localStorageUtils.retrieveData() ?? INIT_STATE;
 
 export default function IncidentStepper(props) {
     const classes = useStyles();
@@ -84,7 +66,7 @@ export default function IncidentStepper(props) {
     const saveObjectPropertyToState = (subStep, instance) => {
         const state = {...data};
         state[subStep] = instance;
-        storeDataToLocalStorage(state);
+        localStorageUtils.storeData(state);
         setData(state);
     }
 
@@ -134,10 +116,7 @@ export default function IncidentStepper(props) {
     };
 
     const handleReset = () => {
-        try {
-            localStorage.removeItem(STORAGE_KEY);
-        } catch {
-        }
+        localStorageUtils.removeData();
         setData(getInitData());
         setActiveStep(0);
     };
