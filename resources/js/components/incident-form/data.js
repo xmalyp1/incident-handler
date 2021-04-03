@@ -23,4 +23,6 @@ const initState = parts.reduce((data, part) => ({
     }), {})
 }), {});
 
+export const addDropdownItems = (field, props) => parts[0].fields.find(e => e.name === field).items = JSON.parse(props[field]);
+
 export const getInitData = () => retrieveData() ?? initState;

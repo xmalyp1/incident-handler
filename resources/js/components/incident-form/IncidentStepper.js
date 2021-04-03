@@ -10,7 +10,7 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import BasePart from "./BasePart";
 import parts from './parts';
-import {getInitData} from './data';
+import {addDropdownItems, getInitData} from './data';
 import * as localStorageUtils from '../../common/localStorageUtils';
 
 const useStyles = makeStyles((theme) => ({
@@ -36,27 +36,14 @@ export default function IncidentStepper(props) {
     const [skipped, setSkipped] = useState(new Set());
     const [data, setData] = useState(getInitData());
 
-    const addDropdownItems = (field) => parts[0].fields.find(e => e.name === field).items = JSON.parse(props[field]);
-    addDropdownItems('maritalStatus');
-    addDropdownItems('insuranceCompany');
-
-    const saveObjectPropertyToState = (subStep, instance) => {
-        const state = {...data};
-        state[subStep] = instance;
-        localStorageUtils.storeData(state);
-        setData(state);
-    }
+    addDropdownItems('maritalStatus', props);
+    addDropdownItems('insuranceCompany', props);
 
     const handleStateChange = (key, childState) => {
-        const parentKeys = Object.keys(data)
-        const updatedKey = parentKeys.find(value => value === key);
-        console.debug(`Searching ${key} in ${parentKeys} and found: ${updatedKey}`);
-
-        if (updatedKey != null) {
-            saveObjectPropertyToState(updatedKey, childState)
-        } else {
-            console.error("INCIDENT HANDLER ERROR : State has not been updated, because the key for update is undefined.")
-        }
+        const state = {...data};
+        state[key] = childState;
+        localStorageUtils.storeData(state);
+        setData(state);
     }
 
     const isStepOptional = (step) => !!parts[step]?.optional;
