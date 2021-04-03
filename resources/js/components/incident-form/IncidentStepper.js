@@ -10,6 +10,7 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import BasePart from "./BasePart";
 import parts from './parts';
+import {getInitData} from './data';
 import * as localStorageUtils from '../../common/localStorageUtils';
 
 const useStyles = makeStyles((theme) => ({
@@ -28,30 +29,6 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: theme.spacing(1),
     }
 }));
-
-const INIT_DATE = new Date();
-
-const getDefaultValue = (type) => {
-    switch (type) {
-        case 'date':
-        case 'time':
-            return INIT_DATE;
-        case 'number':
-            return 0
-        default:
-            return '';
-    }
-}
-
-const INIT_STATE = parts.reduce((data, part) => ({
-    ...data,
-    [part.name]: part.fields.reduce((state, field) => ({
-        ...state,
-        [field.value ?? field.name]: getDefaultValue(field.type)
-    }), {})
-}), {});
-
-const getInitData = () => localStorageUtils.retrieveData() ?? INIT_STATE;
 
 export default function IncidentStepper(props) {
     const classes = useStyles();
