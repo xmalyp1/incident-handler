@@ -1,20 +1,6 @@
 import parts from "./parts";
 import {retrieveData} from "../../common/localStorageUtils";
-import {FieldType} from "./field";
-
-const now = new Date();
-
-const getDefaultValue = (type: FieldType): Date | number | string => {
-    switch (type) {
-        case 'date':
-        case 'time':
-            return now;
-        case 'number':
-            return 0
-        default:
-            return '';
-    }
-}
+import {getDefaultValue} from "./fieldType";
 
 const initState = parts.reduce((data, part) => ({
     ...data,

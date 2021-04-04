@@ -26,6 +26,7 @@ export default withStyles(theme => ({
         super(props);
         this.state = props.data[props.part.name];
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.findField = this.findField.bind(this);
         this.handleDatePickerChange = this.handleDatePickerChange.bind(this);
     }
 
@@ -34,17 +35,17 @@ export default withStyles(theme => ({
     }
 
     handleInputChange(event) {
-        const target = event.target;
-        // const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-        const updateValueFunc = this.props.part.fields.find(e => e.name === name).updateValue;
-        const value = !!updateValueFunc ?
-            updateValueFunc(target.value)
-            : target.value;
+        const {name, v} = event.target;
+        const updateValueFunc = this.findField(name).updateValue;
+        const value = !!updateValueFunc ? updateValueFunc(v) : v;
 
         this.setState({
             [name]: value
         });
+    }
+
+    findField(name) {
+        return this.props.part.fields.find(e => e.name === name);
     }
 
     handleDatePickerChange(field) {

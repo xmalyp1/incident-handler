@@ -1,4 +1,4 @@
-export type FieldType = 'date' | 'time' | 'dropdown' | 'number';
+import {FieldType} from "./fieldType";
 
 interface _Field {
     readonly name: string,

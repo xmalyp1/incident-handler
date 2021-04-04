@@ -11,7 +11,6 @@ const parts: Part[] = [
                 autoComplete: 'given-name',
                 required: true,
                 error: (value) => !value,
-                updateValue: (value) => value.toUpperCase()
             },
             {
                 name: 'lastName',
