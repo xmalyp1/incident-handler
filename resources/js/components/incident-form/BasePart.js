@@ -36,8 +36,12 @@ export default withStyles(theme => ({
     handleInputChange(event) {
         const target = event.target;
         // const value = target.type === 'checkbox' ? target.checked : target.value;
-        const value = target.value;
         const name = target.name;
+        const updateValueFunc = this.props.part.fields.find(e => e.name === name).updateValue;
+        const value = !!updateValueFunc ?
+            updateValueFunc(target.value)
+            : target.value;
+
         this.setState({
             [name]: value
         });

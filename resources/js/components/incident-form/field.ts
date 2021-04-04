@@ -11,6 +11,7 @@ interface _Field {
     readonly error?: (value: string | number, state: object) => boolean,
     readonly sm?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12,
     readonly marginDivider?: boolean,
+    readonly updateValue?: (value) => any,
     items?: string[],
 }
 
