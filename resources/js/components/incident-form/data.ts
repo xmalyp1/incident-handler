@@ -1,9 +1,10 @@
 import parts from "./parts";
 import {retrieveData} from "../../common/localStorageUtils";
+import {FieldType} from "./field";
 
 const now = new Date();
 
-const getDefaultValue = (type) => {
+const getDefaultValue = (type: FieldType): Date | number | string => {
     switch (type) {
         case 'date':
         case 'time':
@@ -23,6 +24,8 @@ const initState = parts.reduce((data, part) => ({
     }), {})
 }), {});
 
-export const addDropdownItems = (field, props) => parts[0].fields.find(e => e.name === field).items = JSON.parse(props[field]);
+export const addDropdownItems = (field: string, props): void => {
+    parts[0].fields.find(e => e.name === field).items = JSON.parse(props[field]);
+}
 
-export const getInitData = () => retrieveData() ?? initState;
+export const getInitData = (): {} => retrieveData() ?? initState;

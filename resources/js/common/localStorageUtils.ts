@@ -1,6 +1,6 @@
 const STORAGE_KEY = 'INC_DATA';
 
-export const storeData = (data) => {
+export const storeData = (data): void => {
     try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     } catch {
@@ -8,7 +8,7 @@ export const storeData = (data) => {
     }
 }
 
-export const retrieveData = () => {
+export const retrieveData = (): {} | undefined => {
     try {
         const storedData = localStorage.getItem(STORAGE_KEY);
         if (storedData != null) {
@@ -19,7 +19,7 @@ export const retrieveData = () => {
     }
 }
 
-export const removeData = () => {
+export const removeData = (): void => {
     try {
         localStorage.removeItem(STORAGE_KEY);
     } catch {

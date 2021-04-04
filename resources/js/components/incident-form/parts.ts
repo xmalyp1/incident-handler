@@ -1,4 +1,6 @@
-export default [
+import {Part} from './Part';
+
+const parts: Part[] = [
     {
         name: 'employeePart',
         label: 'Údaje o zamestancovi',
@@ -171,3 +173,5 @@ export default [
         ],
     },
 ]
+
+export default parts;
