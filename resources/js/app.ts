@@ -12,7 +12,6 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-require('./components/Example');
 require('./components/CookieMessage');
 require('./components/Footer');
 require('./pages/Home');
