@@ -184,8 +184,5 @@ export default function Home(props) {
         </React.Fragment>
     );
 }
-if (document.getElementById('home')) {
-    const propsContainer = document.getElementById("home-props");
-    const props = Object.assign({}, propsContainer.dataset);
-    ReactDOM.render(<Home {...props}/>, document.getElementById('home'));
-}
+const propsContainer = document.getElementById("home-props");
+ReactDOM.render(<Home {...propsContainer.dataset}/>, document.getElementById('home'));

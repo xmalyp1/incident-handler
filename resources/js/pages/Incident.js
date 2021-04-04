@@ -4,24 +4,14 @@ import Box from '@material-ui/core/Box';
 import ReactDOM from "react-dom";
 import IncidentStepper from "../components/incident-form/IncidentStepper";
 
-export default function Incident(props) {
+const Incident = (props) => (
+    <React.Fragment>
+        <CssBaseline/>
+        <Box component="main">
+            <IncidentStepper {...props}/>
+        </Box>
+    </React.Fragment>
+);
 
-    return (
-        <React.Fragment>
-            <CssBaseline/>
-            <Box component="main">
-                <IncidentStepper {...props}/>
-                {/*<Stepper children={EmployeePart}/>*/}
-                {/*<IncidentForm/>*/}
-            </Box>
-        </React.Fragment>
-    )
-}
-
-
-if (document.getElementById('incident')) {
-    const propsContainer = document.getElementById("incident-props");
-    const props = Object.assign({}, propsContainer.dataset);
-    console.log(props);
-    ReactDOM.render(<Incident {...props}/>, document.getElementById('incident'));
-}
+const propsContainer = document.getElementById("incident-props");
+ReactDOM.render(<Incident {...propsContainer.dataset}/>, document.getElementById('incident'));

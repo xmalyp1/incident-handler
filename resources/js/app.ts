@@ -14,6 +14,11 @@ require('./bootstrap');
 
 require('./components/CookieMessage');
 require('./components/Footer');
-require('./pages/Home');
-require('./pages/Support');
-require('./pages/Incident');
+
+if (document.getElementById('home')) {
+    require('./pages/Home');
+} else if (document.getElementById('support')) {
+    require('./pages/Support');
+} else if (document.getElementById('incident')) {
+    require('./pages/Incident');
+}
