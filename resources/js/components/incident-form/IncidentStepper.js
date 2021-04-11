@@ -34,7 +34,7 @@ export default function IncidentStepper(props) {
     const classes = useStyles();
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set());
-    const [data, setData] = useState(getInitData());
+    const [data, setData] = useState(getInitData);
 
     addDropdownItems('maritalStatus', props);
     addDropdownItems('insuranceCompany', props);

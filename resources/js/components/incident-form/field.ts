@@ -1,4 +1,4 @@
-import {FieldType} from "./fieldType";
+import {FieldType, getDefaultValue} from "./fieldType";
 
 interface _Field {
     readonly name: string,
@@ -12,7 +12,13 @@ interface _Field {
     readonly sm?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12,
     readonly marginDivider?: boolean,
     readonly updateValue?: (value) => any,
+    readonly updateState?: (value) => Array<UpdatedState>
     items?: string[],
+}
+
+interface UpdatedState{
+    key: string
+    value: any
 }
 
 interface TextField extends _Field {

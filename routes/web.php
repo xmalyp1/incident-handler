@@ -22,7 +22,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/help', [SupportController::class, 'index'])->name("support");
 Route::get('/incident', [IncidentController::class, 'index'])->name("incident");
-
+Route::post('/incident',[IncidentController::class,'handleIncident']) ->name('incident');
 Auth::routes();
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

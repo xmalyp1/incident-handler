@@ -35,13 +35,23 @@ export default withStyles(theme => ({
     }
 
     handleInputChange(event) {
-        const {name, v} = event.target;
-        const updateValueFunc = this.findField(name).updateValue;
-        const value = !!updateValueFunc ? updateValueFunc(v) : v;
-
+        const {name, value} = event.target;
+        const field = this.findField(name);
+        const updateValueFunc = field.updateValue;
+        const updatedValue = !!updateValueFunc ? updateValueFunc(value) : value;
         this.setState({
-            [name]: value
+            [name]: updatedValue
         });
+
+        const updateStateFunc = field.updateState;
+        const updateStates = !!updateStateFunc ? updateStateFunc(value) : undefined;
+        if(updateStates !== undefined){
+            for(let updatedState of updateStates){
+                this.setState({
+                    [updatedState.key]:updatedState.value
+                })
+            }
+        }
     }
 
     findField(name) {

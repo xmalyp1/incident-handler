@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\InsuranceCompany;
 use App\Models\MaritalStatus;
+use Illuminate\Http\Request;
 
 class IncidentController extends Controller
 {
@@ -18,5 +19,9 @@ class IncidentController extends Controller
     public function index()
     {
         return $this->showPage(__('common.incident'));
+    }
+
+    public function handleIncident(Request $request){
+       response()->json($request,200);
     }
 }

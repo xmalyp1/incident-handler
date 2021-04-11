@@ -11,6 +11,11 @@ const parts: Part[] = [
                 autoComplete: 'given-name',
                 required: true,
                 error: (value) => !value,
+                updateValue: (value) => {
+                    if(value !== undefined){
+                      return value.charAt(0).toUpperCase() + value.slice(1);
+                    }
+                }
             },
             {
                 name: 'lastName',
@@ -29,7 +34,50 @@ const parts: Part[] = [
                 name: 'personalId',
                 label: 'Rodné číslo',
                 required: true,
-                error: (value) => value.length !== 10 || parseInt(value) % 11 !== 0,
+                updateState: (value) => {
+                  let states = new Array();
+                  if(value !== undefined){
+                      let digits = value.replace("/","");
+                      if(digits.length > 5){
+                            let date = new Date();
+                            let year = parseInt(digits.substring(0,2));
+                            if(year !== null) {
+                                date.setMonth(parseInt(digits.substring(2,4))-1)
+                                date.setDate(digits.substring(4,6))
+                                let yearString = year > 22 ? '19'+year.toString() : '20' + year.toString();
+                                date.setFullYear(parseInt(yearString));
+                                states.push({key:"birthDate",value: date});
+                            }
+                      }
+                  }
+                  return states;
+                },
+                error: (value) => {
+                    if(value === undefined)
+                        return false;
+                    let digits = value.replace("/","");
+                    if (!digits || /^\s*$/.test(digits))
+                        return false;
+
+                    //rodne cislo musi byt delitelne 11
+                    if (parseInt(digits) % 11 !== 0) {
+                        console.log('Rodné číslo musí byť deliteľné číslom 11.')
+                        return true;
+                    }
+                    let length = digits.length;
+                    //Rodné číslo pridelené osobe narodenej do 31. decembra 1953 je deväťmiestne s trojmiestnou koncovkou.
+                    if((length > 1 && length < 10) && parseInt(digits.substring(0,2)) > 53){
+                        console.log('Rodné číslo pridelené osobe narodenej do 31. decembra 1953 je deväťmiestne s trojmiestnou koncovkou.');
+                        return true;
+                    }
+
+                    if(length < 9 || length > 10) {
+                        console.log('Dĺžka rodného číslo je 9 / 10 miestne')
+                        return true;
+                    }
+
+                    return false;
+                },
             },
             {
                 name: 'address1',
@@ -59,13 +107,14 @@ const parts: Part[] = [
                 label: 'PSČ',
                 autoComplete: 'shipping postal-code',
                 required: true,
-                error: (value) => value.length !== 5,
+                error: (value) => { return value !== undefined && value.length !== 5; },
             },
             {
                 name: 'maritalStatus',
                 label: 'Rodinný stav',
                 itemSelector: 'status',
                 type: 'dropdown',
+                value:"",
                 marginDivider: true,
             },
             {
@@ -90,6 +139,7 @@ const parts: Part[] = [
                 itemSelector: 'name',
                 type: 'dropdown',
                 marginDivider: true,
+                value:"",
             },
         ],
     },
@@ -106,7 +156,6 @@ const parts: Part[] = [
             },
             {
                 name: 'incidentTime',
-                value: 'incidentDate',
                 label: 'Čas úrazu',
                 placeholder: '12:00',
                 type: 'time',

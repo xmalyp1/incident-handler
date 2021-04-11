@@ -1,5 +1,5 @@
 export type FieldType = 'date' | 'time' | 'dropdown' | 'number';
-type ValueType = Date | number | string;
+export type ValueType = Date | number | string;
 
 const now = new Date();
 
