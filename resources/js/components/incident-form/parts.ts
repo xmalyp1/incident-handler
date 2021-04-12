@@ -221,6 +221,43 @@ const parts: Part[] = [
             }
         ],
     },
+    {
+        name: 'incidentDetails',
+        label: 'Detaily o úraze',
+        optional: false,
+        fields:[
+            {
+                name: 'alcohol',
+                label: 'Požitie alkohol alebo zneužitie iných návykových látok',
+                type: 'checkbox',
+                sm: 12,
+            },
+            {
+                name: 'crime',
+                label: 'Spáchanie úmyselného trestného činu',
+                type: 'checkbox',
+                sm: 12,
+            },
+            {
+                name: 'causedByOthers',
+                label: 'Úraz zavinila iná osoba',
+                type: 'checkbox',
+                sm: 12,
+            },
+            {
+                name: 'investigatedByPolice',
+                label: 'Úraz vyšetroval orgán Policajného zboru SR',
+                type: 'checkbox',
+                sm: 12,
+            },
+            {
+                name: 'investigatedByPolice',
+                label: 'Evidenciu miezd vedie zodpovedný zamestnávateľ',
+                type: 'checkbox',
+                sm: 12,
+            }
+        ]
+    }
 ]
 
 export default parts;

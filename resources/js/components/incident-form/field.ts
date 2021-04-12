@@ -50,4 +50,9 @@ interface TimeField extends _Field {
     readonly error?: (value: string, state: object) => boolean,
 }
 
-export type Field = TextField | DropdownField | NumberField | DateField | TimeField;
+interface Checkbox extends _Field {
+    readonly type: 'checkbox'
+    readonly error?: (value: string, state: object) => boolean,
+}
+
+export type Field = TextField | DropdownField | NumberField | DateField | TimeField | Checkbox;

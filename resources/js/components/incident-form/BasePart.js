@@ -1,6 +1,17 @@
 import React from 'react';
 import Typography from "@material-ui/core/Typography";
-import {FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField, withStyles} from "@material-ui/core";
+import {
+    Checkbox,
+    FormControl,
+    FormControlLabel,
+    Grid,
+    InputLabel,
+    MenuItem,
+    Paper,
+    Select,
+    TextField,
+    withStyles
+} from "@material-ui/core";
 import {KeyboardDatePicker, KeyboardTimePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import ScheduleIcon from "@material-ui/icons/Schedule";
@@ -101,6 +112,8 @@ export default withStyles(theme => ({
                 return this._renderTimePicker(props);
             case 'dropdown':
                 return this._renderDropdown(props);
+            case 'checkbox':
+                return this._renderCheckbox(props);
             default:
                 return this._renderTextField({type, ...props});
         }
@@ -165,6 +178,14 @@ export default withStyles(theme => ({
                 )}
             </Select>
         </FormControl>;
+    }
+
+    _renderCheckbox({name,label,required,error}){
+        return   <FormControlLabel
+            control={<Checkbox id={name} name={name} required={required} value={this.state[name]} error={!!error && error(this.state[name], this.state)} color="primary" />}
+            label={label}
+            labelPlacement="start"
+        />;
     }
 
     _renderTextField({name, label, autoComplete, required, type, inputProps, rows, error}) {

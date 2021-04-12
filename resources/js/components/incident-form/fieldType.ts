@@ -1,5 +1,5 @@
-export type FieldType = 'date' | 'time' | 'dropdown' | 'number';
-export type ValueType = Date | number | string;
+export type FieldType = 'date' | 'time' | 'dropdown' | 'number' | 'checkbox';
+export type ValueType = Date | number | string | boolean;
 
 const now = new Date();
 
@@ -10,6 +10,8 @@ export const getDefaultValue = (type: FieldType): ValueType => {
             return now;
         case 'number':
             return 0
+        case 'checkbox':
+            return false
         default:
             return '';
     }
