@@ -30,6 +30,9 @@ export default withStyles(theme => ({
     },
     marginDivider: {
         marginTop: 10
+    },
+    noPadding:{
+        paddingBottom: "0px !important",
     }
 }))
 (class extends React.Component {
@@ -94,11 +97,13 @@ export default withStyles(theme => ({
         </Grid>;
     }
 
-    _renderField({marginDivider = false, sm = 6, name, ...props}) {
+    _renderField({marginDivider = false,noPadding = false, sm = 6, name, ...props}) {
+        const margin = marginDivider ? this.props.classes.marginDivider : "";
+        const padding = noPadding ? this.props.classes.noPadding : "";
         return <Grid item
                      xs={12}
                      sm={sm}
-                     className={marginDivider ? this.props.classes.marginDivider : undefined}
+                     className={margin + ' ' + padding}
                      key={name}>
             {this._chooseItem({name, ...props})}
         </Grid>;
@@ -185,6 +190,7 @@ export default withStyles(theme => ({
             control={<Checkbox id={name} name={name} required={required} value={this.state[name]} error={!!error && error(this.state[name], this.state)} color="primary" />}
             label={label}
             labelPlacement="start"
+            className={this.props.classes.incidentCheckbox}
         />;
     }
 

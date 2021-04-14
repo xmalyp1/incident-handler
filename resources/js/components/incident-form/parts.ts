@@ -231,30 +231,37 @@ const parts: Part[] = [
                 label: 'Požitie alkohol alebo zneužitie iných návykových látok',
                 type: 'checkbox',
                 sm: 12,
+                noPadding: true,
+
             },
             {
                 name: 'crime',
                 label: 'Spáchanie úmyselného trestného činu',
                 type: 'checkbox',
                 sm: 12,
+                noPadding: true,
             },
             {
                 name: 'causedByOthers',
                 label: 'Úraz zavinila iná osoba',
                 type: 'checkbox',
                 sm: 12,
+                noPadding: true,
+
             },
             {
                 name: 'investigatedByPolice',
                 label: 'Úraz vyšetroval orgán Policajného zboru SR',
                 type: 'checkbox',
                 sm: 12,
+                noPadding: true,
             },
             {
-                name: 'investigatedByPolice',
+                name: 'salaryHandling',
                 label: 'Evidenciu miezd vedie zodpovedný zamestnávateľ',
                 type: 'checkbox',
                 sm: 12,
+                noPadding: true,
             }
         ]
     }
