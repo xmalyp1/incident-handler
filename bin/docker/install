@@ -1,0 +1,6 @@
+@echo off
+
+./bin/docker/composer-install
+./bin/docker/build
+docker-compose exec php php /var/www/html/artisan key:generate
+docker-compose run --rm npm install

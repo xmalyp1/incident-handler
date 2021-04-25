@@ -1,0 +1,2 @@
+./bin/docker/build
+docker-compose run npm run watch

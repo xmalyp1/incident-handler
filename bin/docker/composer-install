@@ -1,0 +1,1 @@
+docker run --tty --rm --interactive -v $PWD:/app composer install --no-interaction
